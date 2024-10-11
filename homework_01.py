@@ -7,7 +7,8 @@ print('world!')
 # task 02 == Виправте синтаксичні помилки
 hello = 'Hello'
 world = 'world'
-if True:
+new_var = True
+if new_var:
     print(f'{hello} {world}!')
 
 # task 03  == Вcтавте пропущену змінну у ф-цію print
