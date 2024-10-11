@@ -67,7 +67,7 @@ girls = boys / 2
 boys_today = boys - 1
 girls_today = girls - 2
 children_today = boys_today + girls_today
-print(f'The are {children_today} childrens in theater club today.')
+print(f'The are {children_today} children in theater club today.')
 
 # task 10
 # Перша книжка коштує 8 грн., друга - на 2 грн. дороже,
