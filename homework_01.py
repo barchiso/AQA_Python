@@ -79,7 +79,7 @@ first_book = 8
 second_book = 8 + 2
 third_book = (first_book + second_book) / 2
 all_books = first_book + second_book + third_book
-print(f'First boook cost: {first_book} grn.')
-print(f'Second boook cost: {second_book} grn.')
-print(f'Third boook cost: {third_book} grn.')
+print(f'First book cost: {first_book} grn.')
+print(f'Second book cost: {second_book} grn.')
+print(f'Third book cost: {third_book} grn.')
 print(f'All books will cost: {all_books} grn.')
