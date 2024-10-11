@@ -1,4 +1,4 @@
-"""Fix syntax errors and resolve tasks"""
+"""Fix syntax errors and resolve tasks."""
 # task 01 == Виправте синтаксичні помилки
 print('Hello', end=' ')
 print('world!')
