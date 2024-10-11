@@ -26,8 +26,8 @@ storona_4 = 4
 
 # task 06 == Порахуйте периметр фігури з task 05
 # та виведіть його для користувача
-perimetery = storona_1 + storona_2 + сторона_3 + storona_4
-print(f'Figure perimeter is {perimetery} meters.')
+perimeter = storona_1 + storona_2 + сторона_3 + storona_4
+print(f'Figure perimeter is {perimeter} meters.')
 
 # Resolve math exercises from 2nd class study book.
 # Задачі 07 -10:
