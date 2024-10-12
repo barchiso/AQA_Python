@@ -7,7 +7,8 @@ print('world!')
 # task 02 == Виправте синтаксичні помилки
 hello = 'Hello'
 world = 'world'
-if True:
+new_var = True
+if new_var:
     print(f'{hello} {world}!')
 
 # task 03  == Вcтавте пропущену змінну у ф-цію print
@@ -22,12 +23,12 @@ banana = apples * 4
 # task 05 == виправте назви змінних
 storona_1 = 1
 storona_2 = 2
-сторона_3 = 3
+storona_3 = 3
 storona_4 = 4
 
 # task 06 == Порахуйте периметр фігури з task 05
 # та виведіть його для користувача
-perimeter = storona_1 + storona_2 + сторона_3 + storona_4
+perimeter = storona_1 + storona_2 + storona_3 + storona_4
 print(f'Figure perimeter is {perimeter} meters.')
 
 # Resolve math exercises from 2nd class study book.
@@ -57,6 +58,7 @@ temp_before = zero + 5
 temp_after = temp_before - 10
 temp_evening = temp_after + 4
 print(f'Temperature will be {temp_evening} degrees in evening.')
+
 # task 09
 
 # Взагалі у театральному гуртку - 24 хлопчики, а дівчаток - вдвічі менше.
