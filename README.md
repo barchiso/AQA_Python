@@ -1,2 +1,2 @@
-# AQA_Python_Bohdan_Lutsyk
+# AQA_Python
 AQA Python Course Hillel IT
