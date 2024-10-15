@@ -14,20 +14,41 @@
 # task 03 == Виведіть змінну alice_in_wonderland на друк
 
 # Splitting variable alice_in_wonderland,
-# so that it occupies several physical lines
+# so that it occupies several physical lines.
+# Main option without escape character.
+alice_in_wonderland = '''
+"Would you tell me, please, which way I ought to go from here?"
+"That depends a good deal on where you want to get to," said the Cat.
+"I don't much care where ——" said Alice.
+"Then it doesn't matter which way you go," said the Cat.
+"—— so long as I get somewhere," Alice added as an explanation.
+"Oh, you're sure to do that," said the Cat, "if you only walk long enough."'''
+
+# Additional option with escape character.
+alice_in_wonderland2 = ('\"Would you tell me, please, '
+                        'which way I ought to go from here?\" \n'
+                        '\"That depends a good deal on where '
+                        'you want to get to,\" said the Cat.\n'
+                        '\"I don\'t much care where ——\" said Alice.\n'
+                        '\"Then it doesn\'t matter which way you go,\" '
+                        'said the Cat.\n'
+                        '\"—— so long as I get somewhere,\" '
+                        'Alice added as an explanation.\n'
+                        '\"Oh, you\'re sure to do that,\" said the Cat, '
+                        '\"if you only walk long enough.\"')
+
+print(alice_in_wonderland, end='\n\n')   # Print variable alice_in_wonderland2.
+print(alice_in_wonderland2, end='\n\n')  # Print variable alice_in_wonderland.
+# Compare two variables values.
+print(alice_in_wonderland == alice_in_wonderland2)
+# Compare unique id() value in memory.
+print(alice_in_wonderland is alice_in_wonderland2)
+print(id(alice_in_wonderland))
+print(id(alice_in_wonderland2), end='\n\n')
+
 # Find and display all single quotation marks (') in the text
-alice_in_wonderland = ('\"Would you tell me, please, which way '
-                       'I ought to go from here?\" \n'
-                       '\"That depends a good deal on where you want to get to'
-                       ',\" said the Cat.\n'
-                       '\"I don\'t much care where ——\" said Alice.\n'
-                       '\"Then it doesn\'t matter which way you go,\" '
-                       'said the Cat.\n'
-                       '\"—— so long as I get somewhere,\" '
-                       'Alice added as an explanation.\n'
-                       '\"Oh, you\'re sure to do that,\" said the Cat, '
-                       '\"if you only walk long enough.\"')
-print(alice_in_wonderland, end='\n\n')  # Printing variable.
+quotation_marks = alice_in_wonderland.count("'")
+print(f"Found {quotation_marks} single quotation marks (') in the text")
 
 # Задачі 04 -10:
 # Переведіть задачі з книги "Математика, 5 клас"
