@@ -62,7 +62,7 @@ _log.info(new_adventures_of_tom_sayer)
 # task 04
 # Виведіть, скількі разів у тексті зустрічається літера "h"
 # Count 'h' letter in new_adventures_of_tom_sayer variable and display result.
-letter_h = new_adventures_of_tom_sayer.count('h')
+letter_h = new_adventures_of_tom_sayer.count('h')  # 40 times.
 _log.info('Letter "h" is found %s times in the text.', letter_h)
 
 # task 05
@@ -72,7 +72,7 @@ _log.info('Letter "h" is found %s times in the text.', letter_h)
 words = new_adventures_of_tom_sayer.replace('"', '').split()
 # Creating new list of words with capitalized letter.
 # Calculate quantity of words with capitalized letter with function len().
-uppercase_words = len([word for word in words if word.istitle()])
+uppercase_words = len([word for word in words if word.istitle()])  # 14 letters
 _log.info('There are %s title letter words in the text.', uppercase_words)
 
 # task 06
@@ -80,9 +80,9 @@ _log.info('There are %s title letter words in the text.', uppercase_words)
 # Find first position of word 'Tom' in the text
 first_position = new_adventures_of_tom_sayer.find('Tom')
 # Find and display second position of word 'Tom' in the text.
-second_position = new_adventures_of_tom_sayer.find('Tom', first_position+1)
+second_position = new_adventures_of_tom_sayer.find('Tom', first_position + 1)
 output = (f'The word "Tom" is located in {second_position} position'
-          f' for the second time in the text.')
+          f' for the second time in the text.')  # 439 position
 _log.info(output)
 
 # task 07
@@ -119,12 +119,18 @@ sentence5 = adventures_of_tom_sayer_sentences[4].startswith('By the time')
 # in the list adventures_of_tom_sayer_sentences.
 # If we don't exactly sentences in list and we want to display those sentence
 # which begins with 'By the time', this is best option.
+# Result: Appropriate full sentence text will be displayed.
 _log.info([sentence for sentence in adventures_of_tom_sayer_sentences if
-           sentence.startswith('By the time')])
+           sentence.startswith('By the time')])  # Full sentence text.
+# Option to check and display info about
+# if any sentence begins with 'By the time'.
+# Result: True or False.
+_log.info(any(item.startswith('By the time') for item
+              in new_adventures_of_tom_sayer.split('. ')))  # True
 
 # task 10
 # Виведіть кількість слів останнього
 # речення з adventures_of_tom_sayer_sentences.
 # Display list adventures_of_tom_sayer_sentences last sentence words quantity.
 words_quantity = len(adventures_of_tom_sayer_sentences[-1].split())
-_log.info('Last sentence has %s words.', words_quantity)
+_log.info('Last sentence has %s words.', words_quantity)  # 24
