@@ -50,8 +50,10 @@ _log.info(people_records)
 
 # 3 - check that all people in modified list with records indexes 6, 10, 13
 #     have age >=30.
-condition = (people_records[6][2] and people_records[10][2]
-             and people_records[13][2] >= 30)
+record1 = people_records[6][2]
+record2 = people_records[10][2] 
+record3 = people_records[13][2]
+condition = (record1 and record2 and record3 >= 30)
 
 
 # Display condition check result.
