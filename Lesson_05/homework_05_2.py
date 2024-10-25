@@ -50,12 +50,10 @@ _log.info(people_records)
 
 # 3 - check that all people in modified list with records indexes 6, 10, 13
 #     have age >=30.
-record1 = people_records[6][2]
-record2 = people_records[10][2]
-record3 = people_records[13][2]
-condition = (record1 and record2 and record3 >= 30)
-
-
+# Create filtered list by condition from people_records.
+filtered_people = [people_records[6], people_records[10], people_records[13]]
+# Verify if all people have age >= 30.
+condition = all(age[2] >= 30 for age in filtered_people)
 # Display condition check result.
 condition_check_result = (f'All people in modified list with records '
                           f'indexes 6, 10, 13 have age >= 30: {condition}')
