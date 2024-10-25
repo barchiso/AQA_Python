@@ -61,38 +61,55 @@ car_data = {'Mercedes': ('silver', 2019, 1.8, 'sedan', 50000),
 
 # We have search_criteria as tuple of ( year>= , engine_volume >= , price<=)
 search_criteria = (2017, 1.6, 36000)
+year, engine_vol, price = search_criteria
 
 
 # Option 01.
+def is_valid_dict_value(value):
+    """Check if condition is valid.
+
+    Args:
+        value (integer or float): data from search_criteria
+
+    Returns:
+        boolean: True or False
+    """
+    return value[1] >= year and value[2] >= engine_vol and value[4] <= price
+
+
 # write code that will help us to get cars that satisfy search_criteria.
 # Create new dictionary filtrated by search_criteria value condition.
-filtered_cars = {key: value for key, value in car_data.items()
-                 if value[1] >= search_criteria[0]
-                 and value[2] >= search_criteria[1]
-                 and value[4] <= search_criteria[2]}
+filtered_cars = {key: val for key, val in car_data.items()
+                 if is_valid_dict_value(val)}
 
 # Sort by price ascending.
 # We should print up to five (5) first found elements
 cars = sorted(filtered_cars.items(), key=lambda value: value[1][4])
 
 # display up to five (5) first found elements.
-option1 = f'OPTION # 1: {dict(cars[:5])}'
-_log.info(option1)
+dict_result = f'OPTION # 1: {dict(cars[:5])}'
+_log.info(dict_result)
 
 
 # Option 02.
+def is_valid_l_value(val):
+    """Check if condition is valid.
+
+    Args:
+        val (integer or float): data from search_criteria
+
+    Returns:
+        boolean: True or False
+    """
+    return val[1][1] >= year and val[1][2] >= engine_vol and val[1][4] <= price
+
+
 # Create new list and sort by price ascending.
 filtered_cars_list = sorted(car_data.items(), key=lambda value: value[1][4])
 
 # Filter created list by search_criteria values.
-filtered_cars_list = [value for value in filtered_cars_list
-                      if value[1][1] >= search_criteria[0]
-                      and value[1][2] >= search_criteria[1]
-                      and value[1][4] <= search_criteria[2]]
+cars_list = [val for val in filtered_cars_list if is_valid_l_value(val)]
 
 # Display up to five (5) first found elements.
-option2 = f'OPTION # 2: {dict(filtered_cars_list[:5])}'
-_log.info(option2)
-
-# Compare values from Option 1 and Option 2.
-_log.info(dict(cars[:5]) == dict(filtered_cars_list[:5]))
+list_result = f'OPTION # 2: {dict(cars_list[:5])}'
+_log.info(list_result)
