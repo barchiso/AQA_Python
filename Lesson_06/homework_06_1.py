@@ -22,13 +22,9 @@ entered_text = input('Enter some text: ')
 _log.info(entered_text)
 
 # Get unique symbols from the string.
-unique_symbols = set(entered_text.lower().replace(' ', ''))
-_log.info(unique_symbols)
-
-# Log into console info about unique symbols quantity.
 # unique_symbols_quantity >= 10 ==> True
 # unique_symbols_quantity < 10 ==> False
-if len(unique_symbols) >= 10:
-    _log.info(True)
-else:
-    _log.info(False)
+unique_symbols = len(set(entered_text.lower().replace(' ', ''))) > 10
+
+# Log into console info about unique symbols quantity.
+_log.info(unique_symbols)
