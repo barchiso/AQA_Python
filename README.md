@@ -1,2 +1,2 @@
-# AQA_Python
-AQA Python Course Hillel IT
+# QA Automation Python
+QA Automation Python Course Hillel IT
