@@ -122,9 +122,7 @@ def find_substring(str1, str2):
     Returns:
         int: Index of the first entry
     """
-    if str2 in str1:
-        return str1.find(str2[0])
-    return -1
+    return str1.find(str2) if str2 in str1 else -1
 
 
 string1 = 'Hello, world!'
@@ -168,11 +166,7 @@ def even_number(numbers_list):
     Returns:
         int: Sum of even numbers.
     """
-    even_numbers_sum = 0
-    for number in numbers_list:
-        if number % 2 == 0:
-            even_numbers_sum += number
-    return even_numbers_sum
+    return sum(number for number in numbers_list if number % 2 == 0)
 
 
 numbers2 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12]
@@ -195,8 +189,7 @@ def date_format(*args, sep='.'):
     Returns:
         string: date in formatted string
     """
-    date_string = sep.join(map(str, args))
-    return date_string
+    return sep.join(str(arg) for arg in args)
 
 
 date_string1 = date_format(22, 11, 2003)
@@ -242,10 +235,11 @@ def is_prime_number(number):
     Returns:
         boolean: True or False
     """
-    for i in range(2, int(number ** 0.5) + 1):
-        if number % i == 0:
-            return False
-        return True
+    if number <= 1:
+        return False
+    if any(number % i == 0 for i in range(2, int(number ** 0.5) + 1)):
+        return False
+    return True
 
 
 is_prime_result = is_prime_number(9)
