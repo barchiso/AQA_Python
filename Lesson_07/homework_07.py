@@ -122,7 +122,7 @@ def find_substring(str1, str2):
     Returns:
         int: Index of the first entry
     """
-    return str1.find(str2) if str2 in str1 else -1
+    return str1.find(str2)
 
 
 string1 = 'Hello, world!'
@@ -235,11 +235,9 @@ def is_prime_number(number):
     Returns:
         boolean: True or False
     """
-    if number <= 1:
-        return False
-    if any(number % i == 0 for i in range(2, int(number ** 0.5) + 1)):
-        return False
-    return True
+    return (number > 1 and not any(number % i == 0
+                                   for i in range(2, int(number ** 0.5) + 1)))
 
 
-is_prime_result = is_prime_number(9)
+is_prime_result = is_prime_number(7)
+print(is_prime_result)
