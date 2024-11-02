@@ -55,6 +55,24 @@ def sum_of_all_numbers(list_with_data):
     return result
 
 
+# Optimized option.
+def element_list_division(data_element_string):
+    """Sum of all numbers in element.
+
+    Args:
+        data_element_string (list): Element list.
+
+    Returns:
+        int: Calculation sum of all numbers in element list.
+        string: Sting if error occurs.
+    """
+    try:
+        # Convert string into integer.
+        return sum(int(num) for num in data_element_string.split(','))
+    except ValueError:
+        return "Can't do it!"  # Message if invalid data is entered.
+
+
 def optimized_sum_list(data_list):
     """Optimized sum calculation of all numbers by element in entered list.
 
@@ -64,19 +82,6 @@ def optimized_sum_list(data_list):
     Returns:
            list: List with displayed list element sum.
     """
-    def element_list_division(data_element_string):
-        # Calculation of all numbers in element.
-        # Args:
-        #    data_element_string (list): Element list.
-        # Returns:
-        #    int: Calculation sum of all numbers in element list.
-        #    string: Sting if error occurs.
-        try:
-            # Convert string into integer.
-            return sum(int(num) for num in data_element_string.split(','))
-        except ValueError:
-            return "Can't do it!"  # Message if invalid data is entered.
-
     return [element_list_division(elm) for elm in data_list]
 
 
