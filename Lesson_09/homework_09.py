@@ -54,6 +54,8 @@ def if_else_target_list(list1, list2):
 
 
 target_list = f'Option #1 Output: {if_else_target_list(l1, l2)}'
+_log.info(l1)
+_log.info(l2)
 _log.info(target_list)  # Output: [(2, 1), (4, 2), (6, 3), (8, 0), (10, 0)]
 
 
@@ -77,9 +79,10 @@ def set_dict_target_list(list1, list2):
     d2 = {element: list2[element] for element in range(len(list2))}
 
     # Construct list by using d1.get() and d2.get() to handle missing indexes.
-    return [(d1.get(element, 0), d2.get(element, 0))
-            for element in indexes_set]
+    return [(d1.get(key, 0), d2.get(key, 0)) for key in indexes_set]
 
 
 list_target = f'Option #2 Output: {set_dict_target_list(l3, l4)}'
+_log.info(l3)
+_log.info(l4)
 _log.info(list_target)  # Output: [(1, 2), (2, 4), (3, 6), (0, 8), (0, 10)]
