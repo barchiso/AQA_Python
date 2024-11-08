@@ -48,9 +48,9 @@ def if_else_target_list(list1, list2):
         list: List with data from list1 and list2
               with default value zero (0) to handle missing indexes.
     """
-    return [(list1[element] if element < len(list1) else 0,
-             list2[element] if element < len(list2) else 0)
-            for element in range(max(len(list1), len(list2)))]
+    return [(list1[index] if index < len(list1) else 0,
+             list2[index] if index < len(list2) else 0)
+            for index in range(max(len(list1), len(list2)))]
 
 
 target_list = f'Option #1 Output: {if_else_target_list(l1, l2)}'
@@ -71,12 +71,12 @@ def set_dict_target_list(list1, list2):
               with default value zero (0) to handle missing indexes.
     """
     # Create a set of indexes from both lists.
-    indexes_set = set(range(len(list1))).union(set(range(len(list2))))
+    indexes_set = sorted(set(range(len(list1))).union(set(range(len(list2)))))
 
     # Create dictionaries for list1 and list2
     # with default value of 0 if index is out of range.
-    d1 = {element: list1[element] for element in range(len(list1))}
-    d2 = {element: list2[element] for element in range(len(list2))}
+    d1 = {value: list1[value] for value in range(len(list1))}
+    d2 = {value: list2[value] for value in range(len(list2))}
 
     # Construct list by using d1.get() and d2.get() to handle missing indexes.
     return [(d1.get(key, 0), d2.get(key, 0)) for key in indexes_set]
