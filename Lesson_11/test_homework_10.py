@@ -11,7 +11,8 @@ test_data = [
     ('user4', None, 'ERROR'),  # Invalid case.
     (None, 'failed', 'ERROR'),  # Invalid case.
     (None, None, 'ERROR'),  # Invalid case.
-    ('', '', 'ERROR')]  # Invalid case.
+    ('', '', 'ERROR'),  # Invalid case.
+]
 
 
 @pytest.mark.parametrize('user, status, expected_log_level', test_data)
@@ -33,9 +34,6 @@ def test_log_event_statuses(caplog, user, status, expected_log_level):
     assert expected_message in caplog.text, 'Wrong message.'
     # Verify the log level is correct
     assert caplog.records[0].levelname == expected_log_level, 'Wrong log level'
-    # Display entire caplog text.
-
-    print(caplog.text)
 
 
 # Test case for log event message output.
@@ -57,18 +55,4 @@ def test_log_event_message_format(caplog, user, status, expected_log_level):
     # Verify for the separator between timestamp and message.
     assert ' - L' in caplog.text, 'Separator is missed or message was changed.'
     # Verify the timestamp is present and starts with a year.
-    assert caplog.text.startswith('2024-'), ('Timestamp is missed.')
-
-    # For clarification what is in caplog.records.
-    for record in caplog.records:
-        print('')
-        print('-' * 40)
-        print(f'Log Record: {record}')
-        print(f'Levelname: {record.levelname}')
-        print(f'Message: {record.message}')
-        print(f'Created: {record.created}')
-        print(f'Logger Name: {record.name}')
-        print(f'Levelno: {record.levelno}')
-        print('-' * 40)
-    # Display entire caplog text.
-    print(caplog.text)
+    assert caplog.text.startswith('2024-'), 'Timestamp is missed.'
