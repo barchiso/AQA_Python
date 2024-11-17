@@ -15,6 +15,7 @@ test_data = [
 ]
 
 
+# Test case for log event statuses.
 @pytest.mark.parametrize('user, status, expected_log_level', test_data)
 def test_log_event_statuses(caplog, user, status, expected_log_level):
     """Test logging for different login event statuses.
