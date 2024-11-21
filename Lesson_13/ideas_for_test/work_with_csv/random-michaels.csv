@@ -1,0 +1,131 @@
+ContactID,FirstName,LastName,BadgeName,Birthday,EmailAddress,Employer,Occupation,HomeAddress,HomePhone,MailingAddress,MobilePhone,EnrolledBy,EnrolledDate,EnrolledByLP,WorkshopType,WorkshopNumber,WorkshopStatus,
+"16957","Michael","Owens","MICHAEL","10/21/1990","mike@revolutionalaboratories.com","Revolution Labs LLC","SR Mgr of Brand empowerment","5245 Genesee Cove, San Diego, CA, 92122","","5245 Genesee Cove, San Diego, CA, 92122","(619) 820-7890","Joshua Nussbaum","05/21/2014","116","Advanced","117","Completed Training",
+"16957","Michael","Owens","MICHAEL","10/21/1990","mike@revolutionalaboratories.com","Revolution Labs LLC","SR Mgr of Brand empowerment","5245 Genesee Cove, San Diego, CA, 92122","","5245 Genesee Cove, San Diego, CA, 92122","(619) 820-7890","Joshua Nussbaum","05/21/2014","116","GRACE","7","CC DECL",
+"1885","Michael","Palomino","MICHAEL","05/01/1981","abcpalomino@hotmail.com","First Choice","Account Executive","2153 Evening Side Drive
+West Covina, CA  91792","(626) 961-2438","2153 Evening Side Drive
+West Covina, CA  91792","(626) 391-9891","RHEENA BARTOLOME","11/16/2004","42","Advanced","43","Completed Training",
+"1885","Michael","Palomino","MICHAEL","05/01/1981","abcpalomino@hotmail.com","First Choice","Account Executive","2153 Evening Side Drive
+West Covina, CA  91792","(626) 961-2438","2153 Evening Side Drive
+West Covina, CA  91792","(626) 391-9891","RHEENA BARTOLOME","11/16/2004","42","Basic","43","Completed Training",
+"1885","Michael","Palomino","MICHAEL","05/01/1981","abcpalomino@hotmail.com","First Choice","Account Executive","2153 Evening Side Drive
+West Covina, CA  91792","(626) 961-2438","2153 Evening Side Drive
+West Covina, CA  91792","(626) 391-9891","RHEENA BARTOLOME","11/16/2004","42","LP","43","New Enrollment",
+"1885","Michael","Palomino","MICHAEL","05/01/1981","abcpalomino@hotmail.com","First Choice","Account Executive","2153 Evening Side Drive
+West Covina, CA  91792","(626) 961-2438","2153 Evening Side Drive
+West Covina, CA  91792","(626) 391-9891","RHEENA BARTOLOME","11/16/2004","42","GRACE MEN","2","Completed Training",
+"12764","Michael","Park","MIKE","01/02/1986","mpark21@hotmail.com","","Attorney","246 N. Lucerne Blvd
+Los Angeles, CA 90004","","246 N. Lucerne Blvd
+Los Angeles, CA 90004","(213) 400-4118","Ameet Gandhi","03/27/2012","78","LEGACY","101","Retake Eligible",
+"12764","Michael","Park","MIKE","01/02/1986","mpark21@hotmail.com","","Attorney","246 N. Lucerne Blvd
+Los Angeles, CA 90004","","246 N. Lucerne Blvd
+Los Angeles, CA 90004","(213) 400-4118","Ameet Gandhi","03/27/2012","78","Basic","101","Completed Training",
+"12764","Michael","Park","MIKE","01/02/1986","mpark21@hotmail.com","","Attorney","246 N. Lucerne Blvd
+Los Angeles, CA 90004","","246 N. Lucerne Blvd
+Los Angeles, CA 90004","(213) 400-4118","Ameet Gandhi","03/27/2012","78","Basic","108","AUDIT 1st Prep Complete",
+"12764","Michael","Park","MIKE","01/02/1986","mpark21@hotmail.com","","Attorney","246 N. Lucerne Blvd
+Los Angeles, CA 90004","","246 N. Lucerne Blvd
+Los Angeles, CA 90004","(213) 400-4118","Ameet Gandhi","03/27/2012","78","Advanced","101","Completed Training",
+"12764","Michael","Park","MIKE","01/02/1986","mpark21@hotmail.com","","Attorney","246 N. Lucerne Blvd
+Los Angeles, CA 90004","","246 N. Lucerne Blvd
+Los Angeles, CA 90004","(213) 400-4118","Ameet Gandhi","03/27/2012","78","Masters","13","Funds Transfered To",
+"21431","Michael","Park","DOMINIC","09/06/1969","dominic.p69@me.com","Tour de Force Production","Backstage Manager","13603 Marina Pointe Dr. Apt B605, Marina Del Rey, CA, 90292","","13603 Marina Pointe Dr. Apt B605, Marina Del Rey, CA, 90292","(646) 717-0259","Monica Simone","11/10/2015","129","LEGACY","133","Transfer to Future",
+"21431","Michael","Park","DOMINIC","09/06/1969","dominic.p69@me.com","Tour de Force Production","Backstage Manager","13603 Marina Pointe Dr. Apt B605, Marina Del Rey, CA, 90292","","13603 Marina Pointe Dr. Apt B605, Marina Del Rey, CA, 90292","(646) 717-0259","Monica Simone","11/10/2015","129","LEGACY","136","IN DOOR BL",
+"21431","Michael","Park","DOMINIC","09/06/1969","dominic.p69@me.com","Tour de Force Production","Backstage Manager","13603 Marina Pointe Dr. Apt B605, Marina Del Rey, CA, 90292","","13603 Marina Pointe Dr. Apt B605, Marina Del Rey, CA, 90292","(646) 717-0259","Monica Simone","11/10/2015","129","Basic","130","Completed Training",
+"21431","Michael","Park","DOMINIC","09/06/1969","dominic.p69@me.com","Tour de Force Production","Backstage Manager","13603 Marina Pointe Dr. Apt B605, Marina Del Rey, CA, 90292","","13603 Marina Pointe Dr. Apt B605, Marina Del Rey, CA, 90292","(646) 717-0259","Monica Simone","11/10/2015","129","Advanced","130","Completed Training",
+"21431","Michael","Park","DOMINIC","09/06/1969","dominic.p69@me.com","Tour de Force Production","Backstage Manager","13603 Marina Pointe Dr. Apt B605, Marina Del Rey, CA, 90292","","13603 Marina Pointe Dr. Apt B605, Marina Del Rey, CA, 90292","(646) 717-0259","Monica Simone","11/10/2015","129","Masters","13","Funds Transfered To",
+"21431","Michael","Park","DOMINIC","09/06/1969","dominic.p69@me.com","Tour de Force Production","Backstage Manager","13603 Marina Pointe Dr. Apt B605, Marina Del Rey, CA, 90292","","13603 Marina Pointe Dr. Apt B605, Marina Del Rey, CA, 90292","(646) 717-0259","Monica Simone","11/10/2015","129","Masters","14","New Enrollment",
+"21431","Michael","Park","DOMINIC","09/06/1969","dominic.p69@me.com","Tour de Force Production","Backstage Manager","13603 Marina Pointe Dr. Apt B605, Marina Del Rey, CA, 90292","","13603 Marina Pointe Dr. Apt B605, Marina Del Rey, CA, 90292","(646) 717-0259","Monica Simone","11/10/2015","129","GRACE MEN","11","New Enrollment",
+"18914","Michael","Patterson","MICHAEL","05/14/1991","pattersonxj7@aol.com","MITT","Production","2623 Yearling St,Lakewood,CA,90212","","2623 Yearling St,Lakewood,CA,90212","(562) 310-9807","Rebecca Regnier","02/09/2015","121","LEGACY","123","Completed Training",
+"18914","Michael","Patterson","MICHAEL","05/14/1991","pattersonxj7@aol.com","MITT","Production","2623 Yearling St,Lakewood,CA,90212","","2623 Yearling St,Lakewood,CA,90212","(562) 310-9807","Rebecca Regnier","02/09/2015","121","Basic","123","Completed Training",
+"18914","Michael","Patterson","MICHAEL","05/14/1991","pattersonxj7@aol.com","MITT","Production","2623 Yearling St,Lakewood,CA,90212","","2623 Yearling St,Lakewood,CA,90212","(562) 310-9807","Rebecca Regnier","02/09/2015","121","Advanced","123","Completed Training",
+"18914","Michael","Patterson","MICHAEL","05/14/1991","pattersonxj7@aol.com","MITT","Production","2623 Yearling St,Lakewood,CA,90212","","2623 Yearling St,Lakewood,CA,90212","(562) 310-9807","Rebecca Regnier","02/09/2015","121","Relationship","19","Completed Training",
+"18914","Michael","Patterson","MICHAEL","05/14/1991","pattersonxj7@aol.com","MITT","Production","2623 Yearling St,Lakewood,CA,90212","","2623 Yearling St,Lakewood,CA,90212","(562) 310-9807","Rebecca Regnier","02/09/2015","121","GRACE MEN","8","Completed Training",
+"18914","Michael","Patterson","MICHAEL","05/14/1991","pattersonxj7@aol.com","MITT","Production","2623 Yearling St,Lakewood,CA,90212","","2623 Yearling St,Lakewood,CA,90212","(562) 310-9807","Rebecca Regnier","02/09/2015","121","GRACE MEN","9","Complete - Audit",
+"18914","Michael","Patterson","MICHAEL","05/14/1991","pattersonxj7@aol.com","MITT","Production","2623 Yearling St,Lakewood,CA,90212","","2623 Yearling St,Lakewood,CA,90212","(562) 310-9807","Rebecca Regnier","02/09/2015","121","SAMURAI GAME","4","Completed Training",
+"18914","Michael","Patterson","MICHAEL","05/14/1991","pattersonxj7@aol.com","MITT","Production","2623 Yearling St,Lakewood,CA,90212","","2623 Yearling St,Lakewood,CA,90212","(562) 310-9807","Rebecca Regnier","02/09/2015","121","GRACE MEN","10","AUDIT 1st Prep Complete",
+"904","MICHAEL","PENILLA","MICHAEL","09/11/1956","mpenillocuiro@sbcglobal.net","penilla health","chiropractor","608 w. Beverly Blvd.
+Montebello, CA  90640","","608 w. Beverly Blvd.
+Montebello, CA  90640","","DANILO BECERRA Sr.","09/19/2004","37","Basic","38","Completed Training",
+"676","MICHAEL","PITTS","MICHAEL","09/15/1968","m_pitts@juno.com","CBS","Printer","3215 E. Ransom Stret #3
+Long Beach, CA  90804","(562) 498-7634","3215 E. Ransom Stret #3
+Long Beach, CA  90804","","ROBERT WADE","09/08/2004","39","Basic","42","No Show",
+"10173","Michael","Pokras","MICHAEL","03/11/1984","stonehill222@gmail.com","","Musician","9523 Quartz Ave.
+Chatsworth, CA 91311","","9523 Quartz Ave.
+Chatsworth, CA 91311","(818) 274-2588","Jenna Zucker","05/29/2010","86","Basic","88","Completed Training",
+"21713","Michael","Prentiss","MICHAEL","10/31/1989","SkunkSpray@rocketmail.com","Coffee Shop","Barista","600 Moulton Ave. Ste 203, Los Angeles, CA 90031","","600 Moulton Ave. Ste 203, Los Angeles, CA 90031","(310) 382-7970","Edward Lantz","12/14/2015","128","Basic","131","Transfer to Future",
+"15357","Michael","Raynor","MICHAEL","09/17/1961","mraynor97@gmail.com","","Actor/Writer/Director","1649 N. Martel Ave
+Los Angeles, CA 90046","","1649 N. Martel Ave
+Los Angeles, CA 90046","(323) 842-1961","Zachary Puchtel","10/22/2013","111","Basic","112","Dropped before Ground Rules",
+"22858","Michael","Rice","MICHAEL","08/22/1985","mikeydoeswork@gmail.com","","","130 Gnau Ave., Massillin, OH 44646","","130 Gnau Ave., Massillin, OH 44646","(330) 683-3996","Thomas Scriven","05/24/2016","131","Basic","137","NOT INTERESTED",
+"18699","Michael","Richter","MIKE","09/17/1979","mrichter79@gmail.com","","Professor","New York, NY","","New York, NY","(646) 934-8666","Jennifer Richter","12/16/2014","120","Basic","125","Retake Eligible",
+"14919","Michael","Richter (Basic 111)","MICHAEL","06/20/1953","mrichte1@san.rr.com","","","13249 Cooperage Ct
+Poway, CA 93064","(858) 451-9147","13249 Cooperage Ct
+Poway, CA 93064","(858) 472-4650","Ryan Richter","08/06/2013","109","Basic","111","Completed Training",
+"14919","Michael","Richter (Basic 111)","MICHAEL","06/20/1953","mrichte1@san.rr.com","","","13249 Cooperage Ct
+Poway, CA 93064","(858) 451-9147","13249 Cooperage Ct
+Poway, CA 93064","(858) 472-4650","Ryan Richter","08/06/2013","109","Advanced","111","Completed Training",
+"2942","MICHAEL","RIHALY","MICHAEL","05/04/1954","","24 HOUR FITNESS","PERSONAL TRAINER","1831 TERRACE HEIGHTS
+RENO, NV 89523","(775) 746-2094","1831 TERRACE HEIGHTS
+RENO, NV 89523","(775) 225-4458","GREGORY SAWYER","06/23/2005","44","Basic","49","New Enrollment",
+"2942","MICHAEL","RIHALY","MICHAEL","05/04/1954","","24 HOUR FITNESS","PERSONAL TRAINER","1831 TERRACE HEIGHTS
+RENO, NV 89523","(775) 746-2094","1831 TERRACE HEIGHTS
+RENO, NV 89523","(775) 225-4458","GREGORY SAWYER","06/23/2005","44","LP Re-Take Eligible","1","New Enrollment",
+"1608","MICHAEL","RIVERA","MICHAEL","","","self","retail/model","1235 N. Hayworth Avenue #3
+West Hollywood, CA  90046","(323) 656-4394","1235 N. Hayworth Avenue #3
+West Hollywood, CA  90046","","","10/18/2004","0","Basic","27","New Enrollment",
+"7658","Michael","Roberts","MIKE","05/17/1986","roll_the_dice_in_AZ@yahoo.com","Famous Sams","Chef","7320 E Calle Lugo
+Tucson AZ 85710","","7320 E Calle Lugo
+Tucson AZ 85710","(520) 298-7627","Joshua Simpson","10/11/2008","74","Basic","78","Transfer 2nd Prep Complete",
+"7658","Michael","Roberts","MIKE","05/17/1986","roll_the_dice_in_AZ@yahoo.com","Famous Sams","Chef","7320 E Calle Lugo
+Tucson AZ 85710","","7320 E Calle Lugo
+Tucson AZ 85710","(520) 298-7627","Joshua Simpson","10/11/2008","74","Advance TA's","1","New Enrollment",
+"6780","Michael","Robles","Mike","03/15/1987","","","","","","","","Daisy Martinez","05/21/2008","71","Guest Event Attendee","1","zzzd",
+"1926","MICHAEL","RODRIGUEZ","MICHAEL","","","self","dental assistant","111 N. Soto Street
+Los Angeles, CA  90033","(323) 263-0119","111 N. Soto Street
+Los Angeles, CA  90033","(323) 681-1857","MARIA BARAJAS","11/18/2004","41","Advanced","43","Transfer to Future",
+"1926","MICHAEL","RODRIGUEZ","MICHAEL","","","self","dental assistant","111 N. Soto Street
+Los Angeles, CA  90033","(323) 263-0119","111 N. Soto Street
+Los Angeles, CA  90033","(323) 681-1857","MARIA BARAJAS","11/18/2004","41","Basic","43","Completed Training",
+"1926","MICHAEL","RODRIGUEZ","MICHAEL","","","self","dental assistant","111 N. Soto Street
+Los Angeles, CA  90033","(323) 263-0119","111 N. Soto Street
+Los Angeles, CA  90033","(323) 681-1857","MARIA BARAJAS","11/18/2004","41","Advanced","44","Completed Training",
+"1926","MICHAEL","RODRIGUEZ","MICHAEL","","","self","dental assistant","111 N. Soto Street
+Los Angeles, CA  90033","(323) 263-0119","111 N. Soto Street
+Los Angeles, CA  90033","(323) 681-1857","MARIA BARAJAS","11/18/2004","41","Sexuality","1","New Enrollment",
+"1926","MICHAEL","RODRIGUEZ","MICHAEL","","","self","dental assistant","111 N. Soto Street
+Los Angeles, CA  90033","(323) 263-0119","111 N. Soto Street
+Los Angeles, CA  90033","(323) 681-1857","MARIA BARAJAS","11/18/2004","41","Sexuality","1","Funds Transfered To",
+"1926","MICHAEL","RODRIGUEZ","MICHAEL","","","self","dental assistant","111 N. Soto Street
+Los Angeles, CA  90033","(323) 263-0119","111 N. Soto Street
+Los Angeles, CA  90033","(323) 681-1857","MARIA BARAJAS","11/18/2004","41","Relationship","6","New Enrollment",
+"1926","MICHAEL","RODRIGUEZ","MICHAEL","","","self","dental assistant","111 N. Soto Street
+Los Angeles, CA  90033","(323) 263-0119","111 N. Soto Street
+Los Angeles, CA  90033","(323) 681-1857","MARIA BARAJAS","11/18/2004","41","LP","44","New Enrollment",
+"1926","MICHAEL","RODRIGUEZ","MICHAEL","","","self","dental assistant","111 N. Soto Street
+Los Angeles, CA  90033","(323) 263-0119","111 N. Soto Street
+Los Angeles, CA  90033","(323) 681-1857","MARIA BARAJAS","11/18/2004","41","Masters","3","Completed Training",
+"4937","Michael","Rodriguez","MIKE","05/25/1987","","","Food Runner","1820 Catalina St
+Los Angeles CA 90006","(323) 301-6116","1820 Catalina St
+Los Angeles CA 90006","","Daniel Rojas","05/27/2007","63","Basic","65","No Response",
+"1495","MICHAEL","ROGERS","MICHAEL","","","","sales","161 S. Occidental Blvd. #19
+Los Angeles, CA  90057","(213) 480-1385","161 S. Occidental Blvd. #19
+Los Angeles, CA  90057","","YUKO MIYAHARA","10/17/2004","32","Basic","26","Completed Training",
+"6615","Michael","Ruiz","Michael","","","","","10320 Newcomb Ave.
+Whittier, CA 90603","(562) 902-8240","10320 Newcomb Ave.
+Whittier, CA 90603","","Jerome Castro","04/14/2008","69","Guest Event Attendee","1","New Enrollment",
+"11274","Michael","Saiber","LAURENCE","","michaelsaiber@gmail.com","E3 Live","Teacher/ Owner","610 Broad St
+Klamath Falls, OR 97601","","610 Broad St
+Klamath Falls, OR 97601","(541) 840-3947","CHRISTOPHER DAUGHERTY","04/22/2011","0","Basic","95","Completed Training",
+"11274","Michael","Saiber","LAURENCE","","michaelsaiber@gmail.com","E3 Live","Teacher/ Owner","610 Broad St
+Klamath Falls, OR 97601","","610 Broad St
+Klamath Falls, OR 97601","(541) 840-3947","CHRISTOPHER DAUGHERTY","04/22/2011","0","Advanced","95","Completed Training",
+"11274","Michael","Saiber","LAURENCE","","michaelsaiber@gmail.com","E3 Live","Teacher/ Owner","610 Broad St
+Klamath Falls, OR 97601","","610 Broad St
+Klamath Falls, OR 97601","(541) 840-3947","CHRISTOPHER DAUGHERTY","04/22/2011","0","LEGACY","95","REFUND",
+"20829","Michael","Salenko","MIKE","08/19/1977","msalenko@hotmail.com","Boston ED Services","Business Man","15 19th Ave Apt 2, Venice, CA, 90291","","15 19th Ave Apt 2, Venice, CA, 90291","(512) 850-8144","Ben Sigman","09/02/2015","124","LEGACY","130","Retake Eligible",
+"20829","Michael","Salenko","MIKE","08/19/1977","msalenko@hotmail.com","Boston ED Services","Business Man","15 19th Ave Apt 2, Venice, CA, 90291","","15 19th Ave Apt 2, Venice, CA, 90291","(512) 850-8144","Ben Sigman","09/02/2015","124","Basic","129","Completed Training",
+"20829","Michael","Salenko","MIKE","08/19/1977","msalenko@hotmail.com","Boston ED Services","Business Man","15 19th Ave Apt 2, Venice, CA, 90291","","15 19th Ave Apt 2, Venice, CA, 90291","(512) 850-8144","Ben Sigman","09/02/2015","124","Advanced","130","Complete - Transfer",
+"20829","Michael","Salenko","MIKE","08/19/1977","msalenko@hotmail.com","Boston ED Services","Business Man","15 19th Ave Apt 2, Venice, CA, 90291","","15 19th Ave Apt 2, Venice, CA, 90291","(512) 850-8144","Ben Sigman","09/02/2015","124","Acknowledgement","1","DROP",
+"10445","Michael","Schmidt","MICHAEL","12/27/1964","michael@multipleaxis.com","Self","Banker","PO Box 7
+Sandy Spring, SC","","PO Box 7
+Sandy Spring, SC","(864) 314-0410","Hanh Hoang","08/24/2010","86","Basic","90","Completed Training",
