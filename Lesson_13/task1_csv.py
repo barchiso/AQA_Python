@@ -131,7 +131,8 @@ def compare_csv_files(file1, file2, output_file):
         # Write results to the output file.
         message = f'CSV files: {file1} and {file2} where compared.'
         _log.info(message)
-        return write_to_csv(output_file, result_data, fieldnames)
+        result = write_to_csv(output_file, result_data, fieldnames)
+        return result
 
     except FileNotFoundError as fnf_error:
         error = f'File error: {fnf_error}'
