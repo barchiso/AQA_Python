@@ -10,8 +10,6 @@ from pathlib import Path
 
 from logger import configure_logging
 
-# Paths to the files
-# Initializes the logging system.
 _log = configure_logging()
 
 
