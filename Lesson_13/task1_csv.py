@@ -145,13 +145,13 @@ def compare_csv_files(file1, file2, output_file):
 
 
 # Paths to the files
-file1_path = 'ideas_for_test\\work_with_csv\\random.csv'
-file2_path = 'ideas_for_test\\work_with_csv\\random-michaels.csv'
-file11_path = Path('ideas_for_test\\work_with_csv\\rmc.csv')
-file22_path = Path('ideas_for_test\\work_with_csv\\r-m-c.csv')
+file1_path = 'ideas_for_test/work_with_csv/random.csv'
+file2_path = 'ideas_for_test/work_with_csv/random-michaels.csv'
+file11_path = Path('ideas_for_test/work_with_csv/rmc.csv')
+file22_path = Path('ideas_for_test/work_with_csv/r-m-c.csv')
 
-output_path = 'ideas_for_test\\work_with_csv\\result.csv'
-output_path2 = 'ideas_for_test\\work_with_csv\\result2.csv'
+output_path = 'ideas_for_test/work_with_csv/result.csv'
+output_path2 = 'ideas_for_test/work_with_csv/result2.csv'
 
 # Run the function
 compare_csv_files(file1_path, file2_path, output_path)
