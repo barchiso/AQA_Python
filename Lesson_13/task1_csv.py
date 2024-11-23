@@ -10,7 +10,7 @@ from pathlib import Path
 
 from logger import configure_logging
 
-_log = configure_logging()
+_log = configure_logging(log_file='csv_result.log')
 
 
 def read_from_csv(path_file, encoding='utf-8'):
@@ -39,7 +39,7 @@ def read_from_csv(path_file, encoding='utf-8'):
             # Verify file's headers are valid
             if not reader.fieldnames:
                 raise ValueError(
-                    f'The CSV file {path_file} is empty or has no headers.')
+                    f'The CSV file "{path_file}" is empty or has no headers.')
 
             # Check if the file has valid headers
             data = [{key: value for key, value in row.items() if key.strip()}
@@ -53,7 +53,7 @@ def read_from_csv(path_file, encoding='utf-8'):
             return data  # If success.
 
     except FileNotFoundError:
-        error = f'Error: The specified CSV file {path_file} does not exist.'
+        error = f'Error: The specified CSV file "{path_file}" does not exist.'
         _log.error(error)
     except ValueError as e:
         error = f'Data Error: {e}'
@@ -89,7 +89,7 @@ def write_to_csv(path_file, data, fieldnames, encoding='utf-8'):
             writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
             writer.writeheader()  # Write the header row
             writer.writerows(data)
-        message = f'Data successfully written to file: {path_file}.'
+        message = f'Data successfully written to file: "{path_file}".'
         _log.info(message)
 
         return path_file  # If success.
@@ -137,7 +137,7 @@ def compare_csv_files(file1, file2, output_file):
         result_data = [dict(row) for row in unique_data]
 
         # Write results to the output file.
-        message = f'CSV files: {file1} and {file2} where compared.'
+        message = f'CSV files: "{file1}" and "{file2}" were compared.'
         _log.info(message)
         result = write_to_csv(output_file, result_data, fieldnames)
 
@@ -157,7 +157,7 @@ def compare_csv_files(file1, file2, output_file):
 
 
 # Paths to the files
-file1_path = 'ideas_for_test/work_with_csv/random.cv'
+file1_path = 'ideas_for_test/work_with_csv/random.csv'
 file2_path = 'ideas_for_test/work_with_csv/random-michaels.csv'
 file11_path = Path('ideas_for_test/work_with_csv/rmc.csv')
 file22_path = Path('ideas_for_test/work_with_csv/r-m-c.csv')
