@@ -19,7 +19,10 @@ def validate_json_files(folder_path):
         folder_path (str): Path to folder with files.
 
     Raises:
-        FileNotFoundError: _description_
+        FileNotFoundError: Error if folder isn't found.
+
+    Returns:
+        str: Path to folder with files.
     """
     if not folder_path.is_dir():
         raise FileNotFoundError(
