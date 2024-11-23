@@ -50,20 +50,22 @@ def read_from_csv(path_file, encoding='utf-8'):
                     f'The CSV file {path_file} has no data lines.',
                 )
 
-            return data
+            return data  # If success.
 
     except FileNotFoundError:
         error = f'Error: The specified CSV file {path_file} does not exist.'
-        return _log.error(error)
+        _log.error(error)
     except ValueError as e:
         error = f'Data Error: {e}'
-        return _log.error(error)
+        _log.error(error)
     except csv.Error as e:
         error = f'CSV Parsing Error: {e}'
-        return _log.error(error)
+        _log.error(error)
     except Exception as e:
         error = f'An unexpected error occurred: {e}'
-        return _log.error(error)
+        _log.error(error)
+
+    return error  # If any errors occurred.
 
 
 def write_to_csv(path_file, data, fieldnames, encoding='utf-8'):
@@ -76,8 +78,9 @@ def write_to_csv(path_file, data, fieldnames, encoding='utf-8'):
         encoding (str, optional): The encoding used to decode the file.
 
     Returns:
+        str: Path to the CSV file.
         None: Logs a success message if writing is successful;
-                logs an error otherwise.
+        logs an error otherwise.
     """
     try:
         with open(
@@ -87,11 +90,15 @@ def write_to_csv(path_file, data, fieldnames, encoding='utf-8'):
             writer.writeheader()  # Write the header row
             writer.writerows(data)
         message = f'Data successfully written to file: {path_file}.'
-        return _log.info(message)
+        _log.info(message)
+
+        return path_file  # If success.
 
     except Exception as e:
         error = f'An unexpected error occurred: {e}'
-        return _log.error(error)
+        _log.error(error)
+
+    return error  # If any errors occurred.
 
 
 def compare_csv_files(file1, file2, output_file):
@@ -106,6 +113,7 @@ def compare_csv_files(file1, file2, output_file):
 
     Returns:
         None: Logs the result of the comparison or any encountered errors.
+        boolean: True if success, False if any errors occurs.
     """
     try:
         # Read csv files into list of dictionaries.
@@ -132,27 +140,30 @@ def compare_csv_files(file1, file2, output_file):
         message = f'CSV files: {file1} and {file2} where compared.'
         _log.info(message)
         result = write_to_csv(output_file, result_data, fieldnames)
-        return result
+
+        return result  # If success.
 
     except FileNotFoundError as fnf_error:
         error = f'File error: {fnf_error}'
-        return _log.error(error)
+        _log.error(error)
     except ValueError as value_error:
         error = f'Data error: {value_error}'
-        return _log.error(error)
+        _log.error(error)
     except Exception as e:
         error = f'Unexpected error: {e}'
-        return _log.error(error)
+        _log.error(error)
+
+    return error  # If any errors occurred.
 
 
 # Paths to the files
-file1_path = 'ideas_for_test/work_with_csv/random.csv'
+file1_path = 'ideas_for_test/work_with_csv/random.cv'
 file2_path = 'ideas_for_test/work_with_csv/random-michaels.csv'
 file11_path = Path('ideas_for_test/work_with_csv/rmc.csv')
 file22_path = Path('ideas_for_test/work_with_csv/r-m-c.csv')
 
 output_path = 'ideas_for_test/work_with_csv/result.csv'
-output_path2 = 'ideas_for_test/work_with_csv/result2.csv'
+output_path2 = Path('ideas_for_test/work_with_csv/result2.csv')
 
 # Run the function
 compare_csv_files(file1_path, file2_path, output_path)
