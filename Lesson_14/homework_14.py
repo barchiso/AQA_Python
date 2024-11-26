@@ -7,7 +7,33 @@ Then add a method to the "Student" class
 that allows you to change the student's grade point average.
 Print out information about the student and change their grade point average.
 """
-from logger import configure_logging
+
+import logging
+
+
+def configure_logging():
+    """Logger configuration.
+
+    Returns:
+        logging.Logger: Logging Logger.
+    """
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.DEBUG)
+
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.DEBUG)
+
+    log_formatter = logging.Formatter(
+        ('%(asctime)s. %(msecs)03d: %(module)-12s: '
+         '%(lineno)3d %(levelname)-7s - %(message)s'),
+        '%Y-%m-%d %H:%M:%S',
+    )
+
+    console_handler.setFormatter(log_formatter)
+    logger.addHandler(console_handler)
+
+    return logger
+
 
 _log = configure_logging()
 
@@ -34,23 +60,17 @@ class Student:
 
         Args:
             new_grade (float): New student's average grade.
-
-        Returns:
-            string: _description_
         """
         # B010 "Do not call setattr with a constant attribute value,
         # it is not any safer than normal property access.""
         # if we use setattr(self, 'average_grade', new_grade)
         self.average_grade = new_grade
         message = f'Average grade is changed to : {new_grade}'
-        return message
+        _log.info(message)
+        return self.average_grade
 
     def display_info(self):
-        """Display student's info.
-
-        Returns:
-            string: Student's info.
-        """
+        """Display student's info."""
         message = (f'Student: {self.first_name}, {self.last_name}, '
                    f'Age: {self.age}, Average grade: {self.average_grade}')
         return message
