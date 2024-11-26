@@ -6,6 +6,10 @@ value, output the result to the console through the logger at the info level.
 """
 from pathlib import Path
 
+# Additional Installation Instructions
+# Install 'defusedxml' for safe XML parsing:
+# https://pypi.org/project/defusedxml/
+# pip install defusedxml
 from defusedxml.ElementTree import ParseError, parse
 
 from logger import configure_logging

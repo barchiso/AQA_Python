@@ -98,7 +98,7 @@ def write_to_csv(path_file, data, fieldnames, encoding='utf-8'):
         error = f'An unexpected error occurred: {e}'
         _log.error(error)
 
-    return error  # If any errors occurred.
+    return ''  # If any errors occurred.
 
 
 def compare_csv_files(file1, file2, output_file):
