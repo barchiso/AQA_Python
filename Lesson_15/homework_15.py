@@ -14,6 +14,34 @@ angle_a is given, the value of angle_b is calculated automatically.
 
 Use the "__setattr__" method to set the values of the attributes,
 """
+import logging
+
+
+def configure_logging():
+    """Logger configuration.
+
+    Returns:
+        logging.Logger: Logging Logger.
+    """
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.DEBUG)
+
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.DEBUG)
+
+    log_formatter = logging.Formatter(
+        ('%(asctime)s.%(msecs)03d : %(module)-12s: '
+         '%(lineno)3d %(levelname)-5s - %(message)s'),
+        '%Y-%m-%d %H:%M:%S',
+    )
+
+    console_handler.setFormatter(log_formatter)
+    logger.addHandler(console_handler)
+
+    return logger
+
+
+_log = configure_logging()
 
 
 class Rhomb:
@@ -26,6 +54,7 @@ class Rhomb:
             side_a (float): Rhombus side length.
             angle_a (float): Rhombus angle between two adjacent sides.
         """
+        self.angle_b = None
         self.side_a = side_a
         self.angle_a = angle_a
 
@@ -53,13 +82,33 @@ class Rhomb:
 
         super().__setattr__(name, value)
 
+    def __repr__(self) -> str:
+        """Rhomb object string representation.
 
-rhomb1 = Rhomb(30, 45)  # {'angle_b': 135, 'side_a': 30, 'angle_a': 45}
-rhomb2 = Rhomb(20, 55.5)  # {'angle_b': 124.5, 'side_a': 20, 'angle_a': 55.5}
-rhomb3 = Rhomb(15.5, 0.5)  # {'angle_b': 179.5, 'side_a': 15.5, 'angle_a': 0.5}
-rhomb4 = Rhomb(181, 179)  # {'angle_b': 1, 'side_a': 181, 'angle_a': 179}
-rhomb5 = Rhomb(35, 90)  # ValueError: This is Square not Rhomb.
-rhomb6 = Rhomb(0, 179)  # ValueError: side_a must be a positive number.
-rhomb7 = Rhomb(20, 0)  # ValueError: angle_a must be a positive number.
-rhomb8 = Rhomb(20, 180)  # ValueError: angle_a must be less than 180 degrees.
-rhomb9 = Rhomb(35, 85)  # {'angle_b': 95, 'side_a': 35, 'angle_a': 85}
+        Returns:
+            str: String describing the Rhomb object.
+        """
+        return (f'{self.__class__.__name__} created: side: {self.side_a}, '
+                f'angle a: {self.angle_a}, angle b: {self.angle_b}')
+
+
+if __name__ == '__main__':
+    data = [
+        (30, 45),  # {'angle_b': 135, 'side_a': 30, 'angle_a': 45}
+        (20, 55.5),  # {'angle_b': 124.5, 'side_a': 20, 'angle_a': 55.5}
+        (15.5, 0.5),  # {'angle_b': 179.5, 'side_a': 15.5, 'angle_a': 0.5}
+        (181, 179),  # {'angle_b': 1, 'side_a': 181, 'angle_a': 179}
+        (35, 90),  # ValueError: This is Square not Rhomb.
+        (0, 179),  # ValueError: side_a must be a positive number.
+        (20, 0),  # ValueError: angle_a must be a positive number.
+        (20, 1800),  # ValueError: angle_a must be less than 180 degrees.
+        (35, 85),  # {'angle_b': 95, 'side_a': 35, 'angle_a': 85}
+    ]
+
+    for side, angle in data:
+        try:
+            rhomb = Rhomb(side, angle)
+            _log.info(repr(rhomb))
+            _log.info(rhomb.__dict__)
+        except ValueError as error:
+            _log.error(error)
