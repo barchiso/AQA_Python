@@ -92,22 +92,23 @@ class Rhomb:
                 f'angle a: {self.angle_a}, angle b: {self.angle_b}')
 
 
-data = [
-    (30, 45),  # {'angle_b': 135, 'side_a': 30, 'angle_a': 45}
-    (20, 55.5),  # {'angle_b': 124.5, 'side_a': 20, 'angle_a': 55.5}
-    (15.5, 0.5),  # {'angle_b': 179.5, 'side_a': 15.5, 'angle_a': 0.5}
-    (181, 179),  # {'angle_b': 1, 'side_a': 181, 'angle_a': 179}
-    (35, 90),  # ValueError: This is Square not Rhomb.
-    (0, 179),  # ValueError: side_a must be a positive number.
-    (20, 0),  # ValueError: angle_a must be a positive number.
-    (20, 1800),  # ValueError: angle_a must be less than 180 degrees.
-    (35, 85),  # {'angle_b': 95, 'side_a': 35, 'angle_a': 85}
-]
+if __name__ == '__main__':
+    data = [
+        (30, 45),  # {'angle_b': 135, 'side_a': 30, 'angle_a': 45}
+        (20, 55.5),  # {'angle_b': 124.5, 'side_a': 20, 'angle_a': 55.5}
+        (15.5, 0.5),  # {'angle_b': 179.5, 'side_a': 15.5, 'angle_a': 0.5}
+        (181, 179),  # {'angle_b': 1, 'side_a': 181, 'angle_a': 179}
+        (35, 90),  # ValueError: This is Square not Rhomb.
+        (0, 179),  # ValueError: side_a must be a positive number.
+        (20, 0),  # ValueError: angle_a must be a positive number.
+        (20, 1800),  # ValueError: angle_a must be less than 180 degrees.
+        (35, 85),  # {'angle_b': 95, 'side_a': 35, 'angle_a': 85}
+    ]
 
-for side, angle in data:
-    try:
-        rhomb = Rhomb(side, angle)
-        _log.info(repr(rhomb))
-        _log.info(rhomb.__dict__)
-    except ValueError as error:
-        _log.error(error)
+    for side, angle in data:
+        try:
+            rhomb = Rhomb(side, angle)
+            _log.info(repr(rhomb))
+            _log.info(rhomb.__dict__)
+        except ValueError as error:
+            _log.error(error)
