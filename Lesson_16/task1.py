@@ -20,15 +20,17 @@
 class Employee:
     """Class to represent an employee with a name and a salary."""
 
-    def __init__(self, name, salary):
+    def __init__(self, name, salary, **kwargs):
         """Initialize an Employee instance.
 
         Args:
             name (str): The name of the employee.
             salary (float): The salary of the employee.
+            kwargs: Additional arguments to be passed to the parent class.
         """
         self.name = name
         self.salary = salary
+        super().__init__(**kwargs)
 
 
 # Too few public methods (0/2)PylintR0903:too-few-public-methods
@@ -39,15 +41,16 @@ class Manager(Employee):
         Employee (class): The base class representing an employee.
     """
 
-    def __init__(self, name, salary, department):
+    def __init__(self, name, salary, department, **kwargs):
         """Initialize a Manager instance.
 
         Args:
             name (str): The name of the manager.
             salary (float): The salary of the manager.
             department (str): The department the manager oversees.
+            kwargs: Additional arguments to be passed to the parent class.
         """
-        super().__init__(name, salary)
+        super().__init__(name, salary, **kwargs)
         self.department = department
 
 
@@ -59,15 +62,16 @@ class Developer(Employee):
         Employee (class): The base class representing an employee.
     """
 
-    def __init__(self, name, salary, programming_language=None):
+    def __init__(self, name, salary, programming_language=None, **kwargs):
         """Initialize a Developer instance.
 
         Args:
             name (str): The name of the developer.
             salary (float): The salary of the developer.
             programming_language (str): The primary programming language.
+            kwargs: Additional arguments to be passed to the parent class.
         """
-        super().__init__(name, salary)
+        super().__init__(name, salary, **kwargs)
         self.programming_language = programming_language
 
 
@@ -92,8 +96,8 @@ class TeamLead(Manager, Developer):
             team_size (int): The size of the team the team lead manages.
             programming_language (str): The primary programming language.
         """
-        Manager.__init__(self, name, salary, department)
-        Developer.__init__(self, name, salary, programming_language)
+        super().__init__(name, salary, department,
+                         programming_language=programming_language)
         self.team_size = team_size
 
 
