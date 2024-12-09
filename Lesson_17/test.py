@@ -62,7 +62,6 @@ def get_address_with_default():
             except IndexError:
                 pass
         # Add check if all_addresses is empty, append "Unknown" if true
-        # first_name = data[0] != '' and data[0] == first_name
         if not all_addresses:
             all_addresses.append('Unknown Country')
         full_addr.append(choice(all_addresses))
