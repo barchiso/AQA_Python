@@ -10,10 +10,12 @@
 # Write a decorator that logs the arguments and results of the called function.
 # Write a decorator that intercepts and processes exceptions
 # that occur during the performance of the function.
-
+from functools import wraps
 
 # Iterators:
 # R0903: Too few public methods (1/2) (too-few-public-methods)
+
+
 class ReversedList:
     """Iterate reverse list of items."""
 
@@ -98,10 +100,11 @@ def log_arguments_and_results(func):
     Returns:
         callable: The wrapped function with exception handling.
     """
+    @wraps(func)
     def wrapper(*args):
-        print(f'Function with arguments: {args}')
+        print(f'Function {func.__name__} with arguments: {args}')
         result = func(*args)
-        print(f'Returned result: {result}')
+        print(f'Function {func.__name__} result: {result}')
         return result
     return wrapper
 
@@ -115,11 +118,12 @@ def errors_handler(func):
     Returns:
         callable: The wrapped function with exception handling.
     """
+    @wraps(func)
     def wrapper(*args):
         try:
             return func(*args)
         except Exception as error:
-            return f'{error}'
+            return error
     return wrapper
 
 
@@ -136,6 +140,26 @@ def division(numerator, denominator):
         float: The result of the division.
     """
     return numerator // denominator
+
+
+@log_arguments_and_results
+@errors_handler
+def greet(name, age=None):
+    """Greets a person.
+
+    Args:
+        name (str): The name of the person to greet.
+        age (int, optional): The age of the person. Defaults to None.
+
+    Raises:
+        ValueError: If `age` is provided but is not an integer.
+
+    Returns:
+        str: A greeting message containing the name and age of the person.
+    """
+    if age is not None and not isinstance(age, int):
+        raise ValueError('Age must be an integer.')
+    return f'Hello, {name}! Your age is {age}.'
 
 
 if __name__ == '__main__':
@@ -172,3 +196,6 @@ if __name__ == '__main__':
     print('\nTesting decorators:')
     division(20, 2)  # Should log arguments and result
     division(10, 0)  # Should log the exception
+    greet('Alice', 20)   # Normal execution
+    greet('Alice')   # Normal execution with default age
+    greet('Alice', 'twenty')  # Triggers ValueError
