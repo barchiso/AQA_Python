@@ -48,49 +48,55 @@ class MarsRoverPhotos:
         timeout (int): Timeout duration for HTTP requests in seconds.
     """
 
-    def __init__(self, url, params):
+    def __init__(self, url, params, timeout=5):
         """Initialize the MarsRoverPhotos instance.
 
         Args:
             url (str): The API endpoint URL.
             params (dict): Parameters to be sent with the API request.
+            timeout (int): Timeout for the requests (default is 5).
         """
         self.url = url
         self.params = params
-        self.timeout = 5
+        self.timeout = timeout
+
+    def do_request(self, url, params=None):
+        """Handle GET requests to the NASA API or image URLs.
+
+        Args:
+            url (str): The URL to send the GET request to.
+            params (dict, optional): The parameters to be sent.
+
+        Returns:
+            response (requests.Response): The response from the GET request.
+        """
+        try:
+            # Sending a GET request
+            response = requests.get(url, params=params, timeout=self.timeout)
+            response.raise_for_status()  # Raise an exception for HTTP errors
+            return response
+        except requests.exceptions.RequestException as error:
+            message = f'Request failed: {error}'
+            _log.error(message)
+            return None
 
     def fetch_photos(self):
         """Fetch photos metadata from NASA API."""
+        # Send request to NASA API to get photos data
+        response = self.do_request(self.url, self.params)
+
+        # Get JSON data from response
         try:
-            # Send request to NASA API to get photos data
-            response = requests.get(
-                self.url, self.params, timeout=self.timeout)
-            response.raise_for_status()  # Rase an exception if code is not 2xx
+            data = response.json()
+            photos = data.get('photos')
 
-            # Get JSON data from response
-            try:
-                data = response.json()
-                photos = data.get('photos')
+            if photos:
+                self.download_photos(photos)
+            else:
+                _log.info('No photos found.')
 
-                if photos:
-                    self.download_photos(photos)
-                else:
-                    _log.info('No photos found.')
-
-            except json.JSONDecodeError as error:
-                error = 'Error serializing JSON: {error}'
-                _log.error(error)
-        except requests.exceptions.HTTPError as error:
-            error = f'HTTP Error: {error}'
-            _log.error(error)
-        except requests.exceptions.ConnectionError as error:
-            error = f'Connection Error: {error}'
-            _log.error(error)
-        except requests.exceptions.Timeout as error:
-            error = f'Timeout Error: {error}'
-            _log.error(error)
-        except requests.exceptions.RequestException as error:
-            error = f'Request failed: {error}'
+        except json.JSONDecodeError as error:
+            error = 'Error serializing JSON: {error}'
             _log.error(error)
 
     def download_photos(self, photos):
@@ -114,26 +120,13 @@ class MarsRoverPhotos:
             img_url (str): URL of the image to download.
             index (int): Index for naming the file.
         """
-        try:
-            # Send a request to download the image
-            img_response = requests.get(img_url, timeout=self.timeout)
-            img_response.raise_for_status()
-            with open(f'mars_photo{index}.jpg', 'wb') as img_file:
-                img_file.write(img_response.content)
-                message = f'Mars_photo{index}.jpg downloaded successfully.'
-                _log.info(message)
-        except requests.exceptions.HTTPError as error:
-            error = f'HTTP Error: {error}'
-            _log.error(error)
-        except requests.exceptions.ConnectionError as error:
-            error = f'Connection Error: {error}'
-            _log.error(error)
-        except requests.exceptions.Timeout as error:
-            error = f'Timeout Error: {error}'
-            _log.error(error)
-        except requests.exceptions.RequestException as error:
-            error = f'Request failed: {error}'
-            _log.error(error)
+        # Send a request to download the image
+        img_response = self.do_request(img_url)
+        img_response.raise_for_status()
+        with open(f'mars_photo{index}.jpg', 'wb') as img_file:
+            img_file.write(img_response.content)
+            message = f'Mars_photo{index}.jpg downloaded successfully.'
+            _log.info(message)
 
 
 if __name__ == '__main__':
