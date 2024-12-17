@@ -1,0 +1,31 @@
+category_id,name,description,price
+1,Smartphone,Latest model smartphone,999.99
+1,Laptop,High-performance laptop,1299.99
+1,Headphones,Noise-cancelling headphones,199.99
+1,Camera,Digital SLR camera,699.99
+1,Smartwatch,Feature-packed smartwatch,299.99
+2,T-Shirt,Cotton T-Shirt,19.99
+2,Jeans,Comfortable slim-fit jeans,49.99
+2,Jacket,Warm winter jacket,89.99
+2,Shoes,Running shoes,59.99
+2,Cap,Stylish baseball cap,15.99
+3,Fiction Novel,Bestselling fiction novel,14.99
+3,Cookbook,Recipes from around the world,24.99
+3,Biography,Inspiring life story,19.99
+3,Science Book,Understanding the universe,29.99
+3,Travel Guide,Exploring new destinations,21.99
+4,Blender,Powerful kitchen blender,89.99
+4,Vacuum Cleaner,Efficient vacuum cleaner,149.99
+4,Microwave Oven,Compact microwave oven,99.99
+4,Toaster,4-slice toaster,49.99
+4,Air Purifier,HEPA air purifier,129.99
+5,Action Figure,Collectible action figure,29.99
+5,Puzzle,1000-piece jigsaw puzzle,19.99
+5,Board Game,Family board game,39.99
+5,Building Blocks,Creative building blocks set,49.99
+5,RC Car,Remote-controlled car,59.99
+4,Coffee Machine,,500
+4,Fridge,,999.99
+1,PC,,2999.99
+5,Teddy Bear,,35.99
+2,Jumper,,25
