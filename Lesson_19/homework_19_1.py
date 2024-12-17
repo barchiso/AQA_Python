@@ -122,7 +122,6 @@ class MarsRoverPhotos:
         """
         # Send a request to download the image
         img_response = self.do_request(img_url)
-        img_response.raise_for_status()
         with open(f'mars_photo{index}.jpg', 'wb') as img_file:
             img_file.write(img_response.content)
             message = f'Mars_photo{index}.jpg downloaded successfully.'
