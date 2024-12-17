@@ -104,17 +104,13 @@ def search_products_by_category(conn):
 
 
 if __name__ == '__main__':
-    # Connect to SQLite database (or create it)
-    connection = sqlite3.connect('online_store.db')
+    # Use context manager for SQLite connection
+    with sqlite3.connect('online_store.db') as connection:
+        # Create tables
+        create_tables(connection)
 
-    # Create tables
-    create_tables(connection)
+        # Load data from CSV files
+        load_data(connection)
 
-    # Load data from CSV files
-    load_data(connection)
-
-    # JOIN query that returns information about products and their category
-    search_products_by_category(connection)
-
-    # Close connection
-    connection.close()
+        # Retrieve and display product details along with their category
+        search_products_by_category(connection)
