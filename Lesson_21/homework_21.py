@@ -28,108 +28,140 @@ import logging
 from datetime import datetime
 
 
-def configure_logging(log_file='hb_test.log'):
-    """Logger configuration.
+class HeartbeatAnalyzer:
+    """Analyzes heartbeat differences in a log file."""
 
-    Args:
-        log_file (str): The name of log file where logs will be written.
+    TIME_FORMAT = '%H:%M:%S'
+    WARNING_THRESHOLD = 31
+    ERROR_THRESHOLD = 33
 
-    Returns:
-        logging.Logger: Logging Logger.
-    """
-    logger = logging.getLogger(__name__)
-    logger.setLevel(logging.DEBUG)
+    def __init__(self, log_file, key, output_log='hb_test.log',
+                 encoding='utf-8'):
+        """Initialize the analyzer with log file details.
 
-    # Create a formatter for the logs
-    log_formatter = logging.Formatter(
-        '%(asctime)s.%(msecs)03d : %(module)-12s:%(lineno)3d'
-        ' %(levelname)-7s - %(message)s',
-        '%Y-%m-%d %H:%M:%S',
-    )
+        Args:
+            log_file (str): Path to the log file.
+            key (str): Key to filter log lines.
+            output_log (str): File to write the analysis logs.
+            encoding (str): Encoding used for the log file.
+        """
+        self.log_file = log_file
+        self.key = key
+        self.encoding = encoding
+        self.logger = self._configure_logging(output_log)
 
-    # Create a handler for logging to the console
-    console_handler = logging.StreamHandler()
-    console_handler.setLevel(logging.DEBUG)
-    console_handler.setFormatter(log_formatter)
+    @staticmethod
+    def _configure_logging(log_file='hb_test.log'):
+        """Logger configuration.
 
-    # Create a handler for logging to file
-    file_handler = logging.FileHandler(log_file, mode='a')
-    file_handler.setLevel(logging.DEBUG)
-    file_handler.setFormatter(log_formatter)
+        Args:
+            log_file (str): The name of log file where logs will be written.
 
-    # Add the handler to the logger
-    logger.addHandler(console_handler)
-    logger.addHandler(file_handler)
+        Returns:
+            logging.Logger: Logging Logger.
+        """
+        logger = logging.getLogger(__name__)
+        logger.setLevel(logging.DEBUG)
 
-    return logger
+        # Create a formatter for the logs
+        log_formatter = logging.Formatter(
+            '%(asctime)s.%(msecs)03d : %(module)-12s:%(lineno)3d'
+            ' %(levelname)-7s - %(message)s',
+            '%Y-%m-%d %H:%M:%S',
+        )
 
+        # Create a handler for logging to the console
+        console_handler = logging.StreamHandler()
+        console_handler.setLevel(logging.DEBUG)
+        console_handler.setFormatter(log_formatter)
 
-_log = configure_logging()
+        # Create a handler for logging to file
+        file_handler = logging.FileHandler(log_file, mode='a')
+        file_handler.setLevel(logging.DEBUG)
+        file_handler.setFormatter(log_formatter)
 
+        # Add the handler to the logger
+        logger.addHandler(console_handler)
+        logger.addHandler(file_handler)
 
-def analyze_log(log_file, encoding='utf-8', key='Key TSTFEED0300|7E3E|0400'):
-    """Parse and analyze log file.
+        return logger
 
-    Args:
-        log_file (str): The path to the log file to be analyzed.
-        encoding (str, optional): The encoding used to read the log file.
-        key (str, optional): The key to filter the lines from the log file.
-    """
-    with open(log_file, 'rt', encoding=encoding) as l_fh:
-        log_file_lines = l_fh.readlines()
+    def _get_filtered_log_lines(self):
+        """Extract log lines containing the specified key.
 
-    filtered_list = [line for line in log_file_lines if key in line]
+        Returns:
+            list: Filtered log lines.
+        """
+        with open(self.log_file, 'rt', encoding=self.encoding) as l_fh:
+            log_file_lines = l_fh.readlines()
 
-    parsed_time_list = [extract_timestamp(line) for line in filtered_list]
+        return [line for line in log_file_lines if self.key in line]
 
-    for i in range(len(parsed_time_list) - 1):
-        current_time = parsed_time_list[i]
-        next_time = parsed_time_list[i + 1]
-        log_difference(current_time, next_time)
+    @staticmethod
+    def extract_timestamp(line):
+        """Extract the timestamp and converts it to a `datetime` object.
 
+        Args:
+            line (str): A line from the log file that contains the timestamp.
 
-def extract_timestamp(line):
-    """Extract the timestamp and converts it to a `datetime` object.
+        Returns:
+            datetime: A `datetime` object representing the timestamp.
+        """
+        start_index = line.find('Timestamp ') + len('Timestamp ')
+        time_str = line[start_index:start_index + 8]  # Extract HH:MM:SS
+        return datetime.strptime(time_str, HeartbeatAnalyzer.TIME_FORMAT)
 
-    Args:
-        line (str): A line from the log file that contains the timestamp.
+    def analyze_log(self):
+        """Perform the analysis of the log file."""
+        filtered_list = self._get_filtered_log_lines()
 
-    Returns:
-        datetime: A `datetime` object representing the timestamp.
-    """
-    start_index = line.find('Timestamp ') + len('Timestamp ')
-    time_str = line[start_index:start_index + 8]  # Extract HH:MM:SS
-    return datetime.strptime(time_str, '%H:%M:%S')
+        parsed_time_list = [self.extract_timestamp(
+            line) for line in filtered_list]
 
+        # Iterate through all timestamps in the list except the last one.
+        # The loop stops at len(parsed_time_list) - 1
+        # because each iteration compares the current timestamp
+        # with the next one (i + 1), which would cause an
+        # IndexError if i reached the last element.
+        for i in range(len(parsed_time_list) - 1):
+            current_time = parsed_time_list[i]
+            next_time = parsed_time_list[i + 1]
+            self.log_difference(current_time, next_time)
 
-def log_difference(time_a, time_b):
-    """Compare two timestamps and logs an error or warning.
+    def log_difference(self, time_a, time_b):
+        """Compare two timestamps and logs an error or warning.
 
-    Args:
-        time_a (datetime): The first timestamp to compare.
-        time_b (datetime): The second timestamp to compare.
+        Args:
+            time_a (datetime): The first timestamp to compare.
+            time_b (datetime): The second timestamp to compare.
 
-    Returns:
-        float: The time difference in seconds between the two timestamps.
-    """
-    time_difference = (time_a - time_b).total_seconds()
+        Returns:
+            float: The time difference in seconds between the two timestamps.
+        """
+        time_difference = (time_a - time_b).total_seconds()
 
-    time_a_str = time_a.strftime('%H:%M:%S')
-    time_b_str = time_b.strftime('%H:%M:%S')
+        time_a_str = time_a.strftime(self.TIME_FORMAT)
+        time_b_str = time_b.strftime(self.TIME_FORMAT)
 
-    if time_difference >= 33:
-        message = (f'Heartbeat between {time_a_str} and '
-                   f'{time_b_str} is {time_difference} seconds. '
-                   f'Greater than 33 seconds.')
-        return _log.error(message)
-    if 31 < time_difference < 33:
-        message = (f'Heartbeat between {time_a_str} and '
-                   f'{time_b_str} is {time_difference} seconds. '
-                   f'Greater than 31 seconds.')
-        return _log.warning(message)
+        if time_difference >= self.ERROR_THRESHOLD:
+            message = (f'Heartbeat between {time_a_str} and '
+                       f'{time_b_str} is {time_difference} seconds. '
+                       f'Greater than {self.ERROR_THRESHOLD} seconds.')
+            return self.logger.error(message)
+        if self.WARNING_THRESHOLD < time_difference < self.ERROR_THRESHOLD:
+            message = (f'Heartbeat between {time_a_str} and '
+                       f'{time_b_str} is {time_difference} seconds. '
+                       f'Greater than {self.WARNING_THRESHOLD} seconds.')
+            return self.logger.warning(message)
 
-    return time_difference
+        return time_difference
 
 
 if __name__ == '__main__':
-    analyze_log('hblog.txt')
+    log_analyzer = HeartbeatAnalyzer(
+        log_file='hblog.txt',
+        key='Key TSTFEED0300|7E3E|0400',
+    )
+
+    # Perform the analysis
+    log_analyzer.analyze_log()
