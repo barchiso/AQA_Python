@@ -1,0 +1,85 @@
+"""Homework #25. Work with locators."""
+# 1. Write 25 XPath and 25 CSS locators
+# for the site https://qauto2.forstudy.space/
+# 2. Use the text () function, search by attribute @ ,
+# and complex locators (more than one element)
+# 3. Data for login to the site -
+# login - guest
+# pass - welcome2qauto
+# You can use the following design to access through selenium
+# - driver.get ("<https://UserName:Password@qauto2.forstudy.space>;")
+# 4. Submit in the form of a file with locators in the git
+
+# 25 XPath locators.
+# Header section.
+header_logo = "//a[@class = 'header_logo']//*[name() = 'svg']"
+home_button = "//a[@class = 'btn header-link -active']"
+home_button_text = "//a[text() = 'Home']"
+about_button = "//button[@appscrollto = 'aboutSection']"
+about_button_text = "//button[text() = 'About']"
+contacts_button = "//button[@appscrollto = 'contactsSection']"
+contacts_button_text = "//button[text() = 'Contacts']"
+guest_button = "//button[@class = 'header-link -guest']"
+guest_button_text = "//button[text() = 'Guest log in']"
+sign_in_button = "//button[@class  = 'btn btn-outline-white header_signin']"
+sign_in_button_text = "//button[text() = 'Sign In']"
+
+# Home section.
+header_title = "//h1[@class = 'hero-descriptor_title display-2']"
+header_text = "//p[@class = 'hero-descriptor_descr lead']"
+sign_up_button = "//button[@class = 'hero-descriptor_btn btn btn-primary']"
+sign_up_button_text = "//button[text() = 'Sign up']"
+
+# Sign In form.
+signin_title = "//app-signin-modal/div/h4[@class = 'modal-title']"
+signin_title_text = "//h4[text() = 'Log in']"
+signin_close_button = "//button/span[@aria-hidden = 'true']"
+email_field_name = "//label[text() = 'Email']"
+email_field = "//input[@id = 'signinEmail']"
+password_field_name = "//label[text()= 'Password']"
+password_field = "//input[@id = 'signinPassword']"
+remember_checkbox = "//input[@id = 'remember']"
+remember_checkbox_name = "//label[contains(text(), 'Remember me')]"
+forgot_password = "//button[text() = 'Forgot password']"
+registration_button = "//button[text() = 'Registration']"
+login_button = "//button[@class = 'btn btn-primary']"
+login_button_name = "//button[text() = 'Login']"
+
+# 25 CSS locators.
+# Registration form
+form_title = 'h4.modal-title'
+registration_close_button = "span[aria-hidden='true']"
+name_field = '#signupName'
+last_name_field = '#signupLastName'
+registration_email_field = '#signupEmail'
+registration_password = '#signupPassword'
+re_enter_password = '#signupRepeatPassword'
+register_button = '#signupRepeatPassword'
+
+# Guest section.
+guest_title = '.hero-descriptor_title.display-2'
+guest_description = '.hero-descriptor_descr.lead'
+guest_video = 'iframe.hero-video_frame'
+
+# About section.
+fuel_expenses_image = 'img[src="/assets/images/homepage/info_1.jpg" ]'
+fuel_expenses_title = "div[class='col-12 col-lg-6'] p[class='about-block_title h2']"
+fuel_expenses_text = "div[class='col-12 col-lg-6'] p[class='about-block_descr lead']"
+instructions_image = 'img[src="/assets/images/homepage/info_2.jpg" ]'
+instructions_title = "div[class='col-12 col-lg-6 mt-lg-0 mt-md-5 mt-sm-4 mt-3'] p[class='about-block_title h2']"
+instructions_text = "div[class='col-12 col-lg-6 mt-lg-0 mt-md-5 mt-sm-4 mt-3'] p[class='about-block_descr lead']"
+
+# Contacts section.
+contacts_title = '#contactsSection h2'
+facebook_icon = '.socials_icon.icon.icon-facebook'
+telegram_icon = '.socials_icon.icon.icon-telegram'
+youtube_icon = '.socials_icon.icon.icon-youtube'
+instagram_icon = '.socials_icon.icon.icon-instagram'
+linkedin_icon = '.socials_icon.icon.icon-linkedin'
+url_link = '.contacts_link.display-4'
+email_link = '.contacts_link.h4'
+
+# Footer section.
+copyright_text = 'body app-root app-footer p:nth-child(1)'
+footer_description = 'body app-root app-footer p:nth-child(2)'
+footer_logo = 'svg[xmlns="http://www.w3.org/2000/svg"]'
