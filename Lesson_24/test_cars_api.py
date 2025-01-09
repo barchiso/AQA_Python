@@ -64,8 +64,6 @@
 # it can be registered for the entire
 # Session session.headers.update({'Authorization': 'Bearer ' + access_token})
 
-import logging
-
 import pytest
 import requests
 
@@ -75,22 +73,43 @@ BASE_URL = 'http://127.0.0.1:8080'
 class TestCarSearchAPI:
     """Cars API search functionality test with logging."""
 
-    @classmethod
-    def setup_class(cls):
-        """Set up logging to both console and file before any test runs."""
-        cls.logger = logging.getLogger()
-        cls.logger.setLevel(logging.INFO)
+    @pytest.fixture(autouse=True)
+    def setup_class(self, setup_logging):
+        """Use the logger set up in conftest.py.
 
-        console_handler = logging.StreamHandler()
-        file_handler = logging.FileHandler('test_search.log')
-        formatter = logging.Formatter(
-            '%(asctime)s - %(levelname)s - %(message)s')
+        Args:
+            setup_logging (Logger): The logger instance set up in conftest.py.
+        """
+        self.logger = setup_logging
 
-        console_handler.setFormatter(formatter)
-        file_handler.setFormatter(formatter)
+    def _send_request(self, session, endpoint, params=None):
+        """Send an API request and handle errors.
 
-        cls.logger.addHandler(console_handler)
-        cls.logger.addHandler(file_handler)
+        Args:
+            session (requests.Session): Authenticated session with token.
+            endpoint (str): The API endpoint.
+            params (dict or None): Query parameters for the request.
+
+        Returns:
+            dict: JSON response from the API.
+        """
+        try:
+            response = session.get(
+                f'{BASE_URL}{endpoint}', params=params, timeout=5)
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.Timeout:
+            error_message = 'Request timed out.'
+            self.logger.error(error_message)
+            return pytest.fail(error_message)  # Directly fail the test
+        except requests.exceptions.HTTPError as http_err:
+            error_message = f'HTTP error occurred: {http_err}'
+            self.logger.error(error_message)
+            return pytest.fail(error_message)  # Directly fail the test
+        except Exception as err:
+            error_message = f'An unexpected error occurred: {err}'
+            self.logger.error(error_message)
+            return pytest.fail(error_message)  # Directly fail the test
 
     @pytest.mark.parametrize(
         'sort_by,limit,expected_brands',
@@ -110,11 +129,11 @@ class TestCarSearchAPI:
                              'Ford', 'Mazda', 'Nissan', 'Subaru']),
         ],
     )
-    def test_search_cars(self, auth_token, sort_by, limit, expected_brands):
+    def test_search_cars(self, auth_session, sort_by, limit, expected_brands):
         """Test the Cars API search functionality.
 
         Args:
-            auth_token (requests.Session): The Auth session with Bearer token.
+            auth_session (requests.Session): The Auth session with token.
             sort_by (str or None): The field to sort the results by.
             limit (int or None): The limit of cars to return in the result.
             expected_brands (list): The expected list of car brands.
@@ -123,30 +142,14 @@ class TestCarSearchAPI:
         if limit:
             params['limit'] = limit
 
-        try:
-            # Make the request to the API and raise an HTTPError
-            response = auth_token.get(
-                f'{BASE_URL}/cars', params=params, timeout=5)
-            response.raise_for_status()
+        # Log the full response and brands for debugging
+        cars = self._send_request(auth_session, '/cars', params)
+        brands = [car['brand'] for car in cars]
 
-            # Log the full response and brands for debugging
-            cars = response.json()
-            brands = [car['brand'] for car in cars]
+        self._log_response(sort_by, limit, expected_brands, brands)
 
-            self._log_response(sort_by, limit, expected_brands, brands)
-
-            # Ensure expected brands are in the result (order doesn't matter)
-            self._verify_brands(expected_brands, brands)
-
-        except requests.exceptions.HTTPError as http_err:
-            error_message = f'HTTP error occurred: {http_err}'
-            self.logger.error(error_message)
-            pytest.fail(error_message)
-
-        except Exception as err:
-            error_message = f'Other error occurred: {err}'
-            self.logger.error(error_message)
-            pytest.fail(error_message)
+        # Ensure expected brands are in the result (order doesn't matter)
+        self._verify_brands(expected_brands, brands)
 
     def _log_response(self, sort_by, limit, expected_brands, brands):
         """Log the full response and brand comparison.
@@ -161,7 +164,7 @@ class TestCarSearchAPI:
                             f'limit={limit}: {brands}')
         actual_message = (f'Tested sort_by={sort_by}, limit={limit}. '
                           f'Expected brands: {expected_brands}, '
-                          f'Got brands: {brands[:len(expected_brands)]}')
+                          f'Got brands: {brands}')
         self.logger.info(response_message)
         self.logger.info(actual_message)
 
