@@ -65,7 +65,6 @@
 # Session session.headers.update({'Authorization': 'Bearer ' + access_token})
 
 import pytest
-import requests
 
 BASE_URL = 'http://127.0.0.1:8080'
 
@@ -81,35 +80,6 @@ class TestCarSearchAPI:
             setup_logging (Logger): The logger instance set up in conftest.py.
         """
         self.logger = setup_logging
-
-    def _send_request(self, session, endpoint, params=None):
-        """Send an API request and handle errors.
-
-        Args:
-            session (requests.Session): Authenticated session with token.
-            endpoint (str): The API endpoint.
-            params (dict or None): Query parameters for the request.
-
-        Returns:
-            dict: JSON response from the API.
-        """
-        try:
-            response = session.get(
-                f'{BASE_URL}{endpoint}', params=params, timeout=5)
-            response.raise_for_status()
-            return response.json()
-        except requests.exceptions.Timeout:
-            error_message = 'Request timed out.'
-            self.logger.error(error_message)
-            return pytest.fail(error_message)  # Directly fail the test
-        except requests.exceptions.HTTPError as http_err:
-            error_message = f'HTTP error occurred: {http_err}'
-            self.logger.error(error_message)
-            return pytest.fail(error_message)  # Directly fail the test
-        except Exception as err:
-            error_message = f'An unexpected error occurred: {err}'
-            self.logger.error(error_message)
-            return pytest.fail(error_message)  # Directly fail the test
 
     @pytest.mark.parametrize(
         'sort_by,limit,expected_brands',
@@ -143,8 +113,10 @@ class TestCarSearchAPI:
             params['limit'] = limit
 
         # Log the full response and brands for debugging
-        cars = self._send_request(auth_session, '/cars', params)
+        cars = auth_session.get(f'{BASE_URL}/cars', params=params).json()
         brands = [car['brand'] for car in cars]
+
+        # Ensure expected brands are in the result (order doesn't matter)
 
         self._log_response(sort_by, limit, expected_brands, brands)
 

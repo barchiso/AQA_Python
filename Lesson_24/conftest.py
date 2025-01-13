@@ -1,6 +1,6 @@
 """Fixtures and setup code for the test suite."""
 import logging
-
+import os
 
 import pytest
 import requests
@@ -9,7 +9,45 @@ from requests.auth import HTTPBasicAuth
 BASE_URL = 'http://127.0.0.1:8080'
 USERNAME = 'test_user'  # Moved to constants
 # Default password if not set
-PASSWORD = 'test_pass'
+PASSWORD = os.getenv('TEST_PASSWORD', 'test_pass')
+
+
+def _send_request(method, endpoint, auth=None, timeout=5, headers=None,
+                  **kwargs):
+    """Send HTTP requests with consistent error handling.
+
+    Args:
+        method (str): HTTP method (e.g., 'GET', 'POST').
+        endpoint (str): The endpoint of the API to request.
+        auth (tuple or None): Optional authentication tuple for basic auth.
+        timeout (int, optional): Timeout in seconds for the request.
+        headers (dict, optional): Optional headers to send with the request.
+        kwargs: Additional parameters to pass to the request method.
+
+    Returns:
+        dict: JSON response if available.
+    """
+    url = f'{BASE_URL}{endpoint}'
+    try:
+        response = requests.request(
+            method,
+            url,
+            timeout=timeout,
+            auth=auth,
+            headers=headers,
+            **kwargs,
+        )
+        response.raise_for_status()
+        return response.json()
+    except requests.exceptions.Timeout:
+        error_message = f'Request to {url} timed out.'
+        return pytest.fail(error_message)
+    except requests.exceptions.HTTPError as http_err:
+        error_message = f'HTTP error occurred: {http_err}'
+        return pytest.fail(error_message)
+    except requests.exceptions.RequestException as req_err:
+        error_message = f'Request error occurred: {req_err}'
+        return pytest.fail(error_message)
 
 
 @pytest.fixture(scope='session', autouse=True)
@@ -44,40 +82,21 @@ def auth_session():
         requests.Session: A session with the Authorization header set to
                           'Bearer <access_token>' for authenticated requests.
     """
-    try:
-        # Make the authentication request
-        response = requests.post(
-            f'{BASE_URL}/auth',
-            auth=HTTPBasicAuth(USERNAME, PASSWORD),
-            timeout=5,
-        )
-        response.raise_for_status()
+    auth_response = _send_request(
+        'POST',
+        '/auth',
+        auth=HTTPBasicAuth(USERNAME, PASSWORD),
+    )
 
-        # Extract token from response and create a session
-        try:
-            token = response.json()['access_token']
-        except KeyError:
-            pytest.fail('Access token not found in authentication response.')
+    # Extract token from response and create a session
+    token = auth_response['access_token']
 
-        # Create a session and set the authorization header
-        session = requests.Session()
-        session.headers.update({'Authorization': f'Bearer {token}'})
+    # Create a session and set the authorization header
+    session = requests.Session()
+    session.headers.update({'Authorization': f'Bearer {token}'})
 
-        yield session
+    yield session
 
-    except requests.exceptions.Timeout:
-        # Explicit timeout handling
-        pytest.fail('Authentication request timed out.')
-
-    except requests.exceptions.HTTPError as http_err:
-        error_msg = f'HTTP error occurred: {http_err}'
-        pytest.fail(error_msg)  # Fail the test with the error message
-
-    except requests.exceptions.RequestException as req_err:
-        error_msg = f'Request error occurred: {req_err}'
-        pytest.fail(error_msg)  # Fail the test with the error message
-
-    finally:
-        # Cleanup: Close the session after the test
-        if 'session' in locals():
-            session.close()
+    # Cleanup: Close the session after the test
+    if 'session' in locals():
+        session.close()
