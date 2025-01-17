@@ -1,5 +1,4 @@
 """Page Object Model for the Nova Post tracking page."""
-import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
@@ -54,13 +53,16 @@ class TrackingPage:
             )
             return status.text
         except Exception:
-            return self.get_err_message()
+            return self.get_error_message()
 
-    def get_err_message(self):
+    def get_error_message(self):
         """Retrieve the error message if no parcel is found.
 
         Returns:
             str: The error message text if found, else None.
+
+        Raises:
+            RuntimeError: The error message from the page.
         """
         try:
             error_message = WebDriverWait(self.driver, 10).until(
@@ -68,5 +70,5 @@ class TrackingPage:
             )
             return error_message.text
         except Exception as exc:
-            error = f'Error retrieving error message: {exc}'
-            return pytest.fail(error)
+            raise RuntimeError(
+                f'Error retrieving error message: {exc}') from exc

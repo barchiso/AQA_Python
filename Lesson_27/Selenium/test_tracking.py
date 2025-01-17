@@ -8,7 +8,7 @@
 
 import pytest
 
-from POM_tracking import TrackingPage
+from pom_tracking_page import TrackingPage
 
 
 class TestTracking:
@@ -42,7 +42,7 @@ class TestTracking:
         tracking_page.click_search()
 
         # Retrieve and verify the status or error message
-        status = tracking_page.get_status() or tracking_page.get_err_message()
+        status = tracking_page.get_status()
         if not status or not any(
             expected_status in status for expected_status in expected_statuses
         ):
