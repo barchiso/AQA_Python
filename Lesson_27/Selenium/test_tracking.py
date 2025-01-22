@@ -30,9 +30,6 @@ class TestTracking:
             browser_driver: Selenium WebDriver instance.
             invoice(str): The parcel's invoice number.
             expected_statuses(list): The expected status text.
-
-        Raises:
-            ValueError: If the parcel status doesn't match the expected status.
         """
         tracking_page = TrackingPage(browser_driver)
         tracking_page.load()
@@ -43,10 +40,7 @@ class TestTracking:
 
         # Retrieve and verify the status or error message
         status = tracking_page.get_status()
-        if not status or not any(
+        assert status and any(
             expected_status in status for expected_status in expected_statuses
-        ):
-            raise ValueError(
-                f'Expected one of the statuses: {expected_statuses}, '
-                f'Got: {status}',
+        ), (f'Expected one of the statuses: {expected_statuses}, Got: {status}'
             )
