@@ -50,7 +50,7 @@ class TestRegistration:
     """Test cases for user registration functionality."""
 
     @pytest.mark.parametrize(
-        ('browser_and_form, name, last_name, email, password, '
+        ('browser_and_form, name, last_name, email, password,'
          'confirm_password, expected_message'),
         REGISTRATION_TEST_DATA,
         indirect=['browser_and_form'],
@@ -70,20 +70,44 @@ class TestRegistration:
             expected_message: Expected success or error message.
         """
         # Step 1: Fill out the form
-        signup_form = browser_and_form
-        signup_form.fill_form(
-            name, last_name, email, password, confirm_password)
+        self.fill_registration_form(
+            browser_and_form, name, last_name, email,
+            password, confirm_password)
 
         # Step 2: Check if expected error or success message is displayed
+        self.verify_registration_message(browser_and_form, expected_message)
+
+    @allure.step('Fill out the registration form')
+    def fill_registration_form(self, signup_form, name, last_name,
+                               email, password, confirm_password):
+        """Fill out the registration form with the provided details.
+
+        Args:
+            signup_form: The form object used for registration.
+            name: First name of the user.
+            last_name: Last name of the user.
+            email: Email address of the user.
+            password: Password for the account.
+            confirm_password: Password confirmation.
+        """
+        signup_form.fill_form(name, last_name, email,
+                              password, confirm_password)
+
+    @allure.step('Verify registration message')
+    def verify_registration_message(self, signup_form, expected_message):
+        """Verify the registration success or error message.
+
+        Args:
+            signup_form: The form object used for registration.
+            expected_message: The expected message displayed.
+        """
         if expected_message in signup_form.ERROR_LOCATORS:
-            # Handle error message display
             error_message = signup_form.get_error_message(expected_message)
             assert error_message == expected_message, (
                 f'Expected error: {expected_message}, Found: {error_message}',
             )
         else:
             signup_form.click_register()  # Click the Register button
-            # Handle successful login
             success_message = signup_form.get_success_message()
             assert success_message == expected_message, (
                 f'Expected success: {expected_message}, Found: {
@@ -112,19 +136,37 @@ class TestLogin:
             expected_message: Expected success or error message.
         """
         # Step 1: Fill out the login form
-        signin_form = browser_and_form
-        signin_form.fill_form(email, password)
+        self.fill_login_form(browser_and_form, email, password)
 
         # Step 2: Check if expected error or success message is displayed
+        self.verify_login_message(browser_and_form, expected_message)
+
+    @allure.step('Fill out the login form')
+    def fill_login_form(self, signin_form, email, password):
+        """Fill out the login form with the provided credentials.
+
+        Args:
+            signin_form: The form object used for login.
+            email: Email address used to log in.
+            password: Password for the account.
+        """
+        signin_form.fill_form(email, password)
+
+    @allure.step('Verify login message')
+    def verify_login_message(self, signin_form, expected_message):
+        """Verify the login success or error message.
+
+        Args:
+            signin_form: The form object used for login.
+            expected_message: The expected message displayed after login.
+        """
         if expected_message in signin_form.ERROR_LOCATORS:
-            # Handle error message display
             error_message = signin_form.get_error_message(expected_message)
             assert error_message == expected_message, (
                 f'Expected error: {expected_message}, Found: {error_message}',
             )
         else:
             signin_form.click_login()  # Click the login button
-            # Handle successful login
             success_message = signin_form.get_success_message()
             assert success_message == expected_message, (
                 f'Expected success: {expected_message}, Found: {
@@ -139,20 +181,37 @@ class TestLogout:
     @pytest.mark.parametrize('browser_and_form', ['signin_form'],
                              indirect=True)
     @allure.story('Test logout functionality')
-    @allure.title("User Logout - Verify logout functionality")
+    @allure.title('User Logout - Verify logout functionality')
     def test_logout(self, browser_and_form):
-        """Test logout functionality.
+        """Verify logout functionality.
 
         Args:
             browser_and_form: The browser and form fixture for SignInForm.
         """
         # Step 1: Log in
-        signin_form = browser_and_form
+        self.perform_login(browser_and_form)
+
+        # Step 2: Navigate to the garage page and perform logout
+        self.perform_logout(browser_and_form)
+
+    @allure.step('Perform login')
+    def perform_login(self, signin_form):
+        """Perform login using the provided credentials.
+
+        Args:
+            signin_form: The form object used for login.
+        """
         signin_form.fill_form(login_email, PASSWORD)
         signin_form.click_login()
 
-        # Step 2: Navigate to the garage page and perform logout
-        garage_page = GaragePage(signin_form.page)
+    @allure.step('Perform logout')
+    def perform_logout(self, browser_and_form):
+        """Perform the logout operation.
+
+        Args:
+            browser_and_form: The browser and form fixture for SignInForm.
+        """
+        garage_page = GaragePage(browser_and_form.page)
         garage_page.click_logout()
 
         # Step 3: Verify the user is logged out
