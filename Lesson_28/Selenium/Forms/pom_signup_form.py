@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
 
 
-class SignUpForm():
+class SignUpForm:
     """Represent the Registration form of the qauto2 website."""
 
     def __init__(self, driver):
@@ -61,8 +61,8 @@ class SignUpForm():
             )
         except TimeoutException as exc:
             raise NoSuchElementException(
-                f'Element with locator {
-                    locator} not found within {timeout} seconds.',
+                f'Element with locator {locator} not found'
+                f'within {timeout} seconds.',
             ) from exc
 
     def fill_field(self, field_name, value):

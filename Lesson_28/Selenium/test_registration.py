@@ -12,6 +12,30 @@ from Pages.pom_home_page import HomePage
 PASSWORD = os.getenv('TEST_PASSWORD', 'Password1')
 EMAIL = f'example+{int(datetime.now().timestamp())}@mail.com'
 login_email = EMAIL
+REGISTRATION_TEST_DATA = [
+    ('', 'Bravo', EMAIL, PASSWORD, PASSWORD, 'Name required'),
+    ('Johnny', '', EMAIL, PASSWORD, PASSWORD, 'Last name required'),
+    ('Johnny', 'Bravo', '', PASSWORD, PASSWORD, 'Email required'),
+    ('Johnny', 'Bravo', 'EMAIL', PASSWORD, PASSWORD,
+     'Email is incorrect'),
+    ('Johnny', 'Bravo', EMAIL, '', PASSWORD, 'Password required'),
+    ('Johnny', 'Bravo', EMAIL, PASSWORD, '',
+     'Re-enter password required'),
+    ('Johnny', 'Bravo', EMAIL, 'short', 'short',
+     'Password has to be from 8 to 15 characters long and contain at '
+     'least one integer, one capital, and one small letter'),
+    ('Johnny', 'Bravo', EMAIL, PASSWORD,
+     'Mismatch1', 'Passwords do not match'),
+    ('Johnny', 'Bravo', EMAIL, PASSWORD,
+     PASSWORD, 'Registration complete'),
+]
+
+LOGIN_TEST_DATA = [
+    ('', PASSWORD, 'Email required'),
+    ('invalid_email', PASSWORD, 'Email is incorrect'),
+    ('valid_email', '', 'Password required'),
+    (login_email, PASSWORD, 'You have been successfully logged in'),
+]
 
 
 class TestRegistration:
@@ -19,23 +43,7 @@ class TestRegistration:
 
     @pytest.mark.parametrize(
         'name, last_name, email, password, confirm_password, expected_message',
-        [
-            ('', 'Bravo', EMAIL, PASSWORD, PASSWORD, 'Name required'),
-            ('Johnny', '', EMAIL, PASSWORD, PASSWORD, 'Last name required'),
-            ('Johnny', 'Bravo', '', PASSWORD, PASSWORD, 'Email required'),
-            ('Johnny', 'Bravo', 'EMAIL', PASSWORD, PASSWORD,
-             'Email is incorrect'),
-            ('Johnny', 'Bravo', EMAIL, '', PASSWORD, 'Password required'),
-            ('Johnny', 'Bravo', EMAIL, PASSWORD, '',
-             'Re-enter password required'),
-            ('Johnny', 'Bravo', EMAIL, 'short', 'short',
-             'Password has to be from 8 to 15 characters long and contain at '
-             'least one integer, one capital, and one small letter'),
-            ('Johnny', 'Bravo', EMAIL, PASSWORD,
-             'Mismatch1', 'Passwords do not match'),
-            ('Johnny', 'Bravo', EMAIL, PASSWORD,
-             PASSWORD, 'Registration complete'),
-        ],
+        REGISTRATION_TEST_DATA,
     )
     def test_user_registration(self, browser_driver, name, last_name, email,
                                password, confirm_password, expected_message):
@@ -54,56 +62,65 @@ class TestRegistration:
         home_page = HomePage(browser_driver)
         signup_form = SignUpForm(browser_driver)
 
-        # Load the homepage and navigate to the signup form
         home_page.load()
         home_page.click_signup()
 
-        # Fill out the signup form
         signup_form.fill_form(name, last_name, email,
                               password, confirm_password)
-
-        # Click on the Register button
         signup_form.click_register()
 
-        # Check the expected error or success message
         if expected_message == 'Registration complete':
-            success_message = signup_form.get_success_message()
-            assert success_message == expected_message, (
-                f'Expected: {expected_message}, but got: {success_message}')
-
+            self.validate_success_message(signup_form, expected_message)
         else:
-            error_message_locator = signup_form.get_error_locator(
-                expected_message)
+            self.validate_error_message(signup_form, expected_message)
 
-            if error_message_locator is None:
-                pytest.fail(
-                    f'Error message locator for'
-                    f'{expected_message} not found in the form.')
+    @staticmethod
+    def validate_success_message(signup_form, expected_message):
+        """Validate success messages.
 
-            try:
-                error_message = signup_form.wait_for_element(
-                    error_message_locator).text
-            except Exception as e:
-                pytest.fail(
-                    f'Failed to find error message for'
-                    f'{expected_message}: {str(e)}')
+        Args:
+            signup_form: The sign-up form instance.
+            expected_message: The expected success message.
+        """
+        success_message = signup_form.get_success_message()
+        assert success_message == expected_message, (
+            f'Expected: {expected_message}, but got: {success_message}',
+        )
 
-            assert expected_message in error_message, (
-                f'Expected: {expected_message}, but got: {error_message}')
+    @staticmethod
+    def validate_error_message(signup_form, expected_message):
+        """Validate error messages.
+
+        Args:
+            signup_form: The sign-up form instance.
+            expected_message: The expected error message.
+        """
+        error_message_locator = signup_form.get_error_locator(expected_message)
+        if not error_message_locator:
+            pytest.fail(
+                f'Error message locator for {expected_message}'
+                f'not found in the form.',
+            )
+
+        try:
+            error_message = signup_form.wait_for_element(
+                error_message_locator).text
+        except Exception as e:
+            pytest.fail(
+                f'Failed to find error message for {expected_message}:'
+                f'{str(e)}',
+            )
+
+        assert expected_message in error_message, (
+            f'Expected: {expected_message}, but got: {error_message}',
+        )
 
 
 class TestLogin:
     """Test cases for user login and logout functionality."""
 
     @pytest.mark.parametrize(
-        'email, password, expected_message',
-        [
-            ('', PASSWORD, 'Email required'),
-            ('invalid_email', PASSWORD,
-             'Email is incorrect'),
-            ('valid_email', '', 'Password required'),
-            (login_email, PASSWORD, 'You have been successfully logged in'),
-        ],
+        'email, password, expected_message', LOGIN_TEST_DATA,
     )
     def test_user_login(self, browser_driver, email,
                         password, expected_message):
@@ -128,27 +145,51 @@ class TestLogin:
         signin_form.click_login()
         # Check the expected error or success message
         if expected_message == 'You have been successfully logged in':
-            success_message = signin_form.get_success_message()
-            assert success_message == expected_message, (
-                f'Expected: {expected_message}, but got: {success_message}')
-            # Perform logout
+            self.validate_success_message(signin_form, expected_message)
             garage_page.click_logout()
         else:
-            error_message_locator = signin_form.get_error_locator(
-                expected_message)
-            if error_message_locator is None:
-                pytest.fail(
-                    f'Error message locator for {expected_message}'
-                    f' not found in the form.')
-            try:
-                error_message = signin_form.wait_for_element(
-                    error_message_locator).text
-            except Exception as e:
-                pytest.fail(
-                    f'Failed to find error message for'
-                    f'{expected_message}: {str(e)}')
-            assert expected_message in error_message, (
-                f'Expected: {expected_message}, but got: {error_message}')
+            self.validate_error_message(signin_form, expected_message)
+
+    @staticmethod
+    def validate_success_message(signin_form, expected_message):
+        """Validate success messages.
+
+        Args:
+            signin_form: The sign-in form instance.
+            expected_message: The expected success message.
+        """
+        success_message = signin_form.get_success_message()
+        assert success_message == expected_message, (
+            f'Expected: {expected_message}, but got: {success_message}',
+        )
+
+    @staticmethod
+    def validate_error_message(signin_form, expected_message):
+        """Validate error messages.
+
+        Args:
+            signin_form: The sign-in form instance.
+            expected_message: The expected error message.
+        """
+        error_message_locator = signin_form.get_error_locator(expected_message)
+        if not error_message_locator:
+            pytest.fail(
+                f'Error message locator for {expected_message}'
+                f'not found in the form.',
+            )
+
+        try:
+            error_message = signin_form.wait_for_element(
+                error_message_locator).text
+        except Exception as e:
+            pytest.fail(
+                f'Failed to find error message for {expected_message}:'
+                f'{str(e)}',
+            )
+
+        assert expected_message in error_message, (
+            f'Expected: {expected_message}, but got: {error_message}',
+        )
 
     def test_logout(self, browser_driver):
         """Test logout functionality.
@@ -175,6 +216,7 @@ class TestLogin:
         try:
             signin_button = home_page.wait_for_element(home_page.signin_button)
             assert signin_button.is_displayed(), (
-                'Sign In button not visible after logout.')
+                'Sign In button not visible after logout.',
+            )
         except Exception as e:
             pytest.fail(f'Logout failed: {str(e)}')

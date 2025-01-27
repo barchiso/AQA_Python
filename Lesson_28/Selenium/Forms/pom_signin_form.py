@@ -54,8 +54,8 @@ class SignInForm:
             )
         except TimeoutException as exc:
             raise NoSuchElementException(
-                f'Element with locator {
-                    locator} not found within {timeout} seconds.',
+                f'Element with locator {locator} not found'
+                f'within {timeout} seconds.',
             ) from exc
 
     def fill_field(self, field_name, value):
