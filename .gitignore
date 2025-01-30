@@ -162,3 +162,7 @@ cython_debug/
 #.idea/
 .vscode
 .vscode/
+
+# Ignore Allure folders
+allure_reports
+allure_results
