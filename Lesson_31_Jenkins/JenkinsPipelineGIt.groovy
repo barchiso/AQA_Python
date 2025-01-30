@@ -13,21 +13,21 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: '*/main']],  //  homework_31 
-                    extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'git_dir']],
-                    userRemoteConfigs: [[credentialsId: 'git-creds', url: 'git@github.com:barchiso/AQA_Python.git']]
-                ])
-            }
-        }
+        // stage('Checkout') {
+        //     steps {
+        //         checkout([
+        //             $class: 'GitSCM',
+        //             branches: [[name: '*/main']],  //  homework_31 
+        //             extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'git_dir']],
+        //             userRemoteConfigs: [[credentialsId: 'git-creds', url: 'git@github.com:barchiso/AQA_Python.git']]
+        //         ])
+        //     }
+        // }
 
         stage('Set Up Python') {
             steps {
                 script {
-                    dir('qauto') {
+                    dir('Lesson_31_Jenkins/qauto') {
                         withPythonEnv('python3') {
                             sh '''
                                 echo "Python version:"
@@ -48,7 +48,7 @@ pipeline {
         stage('Run API Tests') {
             steps {
                 script {
-                    dir('qauto') {
+                    dir('Lesson_31_Jenkins/qauto') {
                         withPythonEnv('python3') {
                             sh '''
                                 echo "${Caption}"
@@ -67,7 +67,7 @@ pipeline {
         stage('Run UI Tests') {
             steps {
                 script {
-                    dir('qauto') {
+                    dir('Lesson_31_Jenkins/qauto') {
                         withPythonEnv('python3') {
                             sh '''
                                 echo "${Caption}"
