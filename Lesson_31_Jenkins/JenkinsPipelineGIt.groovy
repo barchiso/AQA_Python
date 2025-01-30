@@ -17,7 +17,7 @@ pipeline {
             steps {
                 checkout([
                     $class: 'GitSCM',
-                    branches: [[name: '*/homework_31']],  //  main 
+                    branches: [[name: '*/main']],  //  homework_31 
                     extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'git_dir']],
                     userRemoteConfigs: [[credentialsId: 'git-creds', url: 'git@github.com:barchiso/AQA_Python.git']]
                 ])
